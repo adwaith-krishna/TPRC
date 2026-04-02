@@ -10,6 +10,7 @@ import {
 } from "react";
 import { CertificateModal } from "./CertificateModal";
 import { ShareFloating } from "./ShareFloating";
+import { urlFor } from "@/lib/sanity.image";
 
 const HERO_BG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuCWASYnz6kODAfg1YQ7cNgUaCc6Qf64cMUfUHa-QNDn1FrMKLUdQdl3YTQHI8hCfUECTGZghv4-X3PzmTWa1V3QJOSi4ifkXFl9DBLxqsCjjWkGdPK2iQIFEFWmJ_Be1ygq8HgEgr-tk8-CPTuhtc4DjiKfL4OnIogfAvI4svCNTlMf5nNGIFUPaIUwtjhC0vjyHufhH0MTJwT3Z9r8iuUVLhjnrFHeJNJ3rsijo4Z820RAIbo4bSFdhdM--vU7TxWWDxHSErUfIfM7";
@@ -33,7 +34,7 @@ const CERT2 =
 const CERT3 =
   "https://img.freepik.com/free-vector/certificate-template-design_53876-59041.jpg";
 
-export function LandingPage() {
+export function LandingPage({ clients }: { clients: any[] }) {
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const pausedSlidersRef = useRef(new Set<string>());
@@ -487,61 +488,20 @@ export function LandingPage() {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            <div className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://www.kone.co.id/Content/images/Kone-og.png"
-                alt="KONE"
-                className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
-              />
-              <p className="font-bold text-sm">KONE Elevators</p>
-            </div>
-            <div className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://propertycloud.in/assets/images/developers/sobha.jpg"
-                alt="Sobha"
-                className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
-              />
-              <p className="font-bold text-sm">Sobha Group</p>
-            </div>
-            <div className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://learnmetallurgy.com/psu/img/mrpl.jpg"
-                alt="ONGC"
-                className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
-              />
-              <p className="font-bold text-sm">ONGC MRPL</p>
-            </div>
-            <div className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://d2un9pqbzgw43g.cloudfront.net/iepfzone/Bharat-Petroleum-Logo-PNG.webp"
-                alt="Bharat Petroleum"
-                className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
-              />
-              <p className="font-bold text-sm">Bharat Petroleum</p>
-            </div>
-            <div className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://1.bp.blogspot.com/-AK5uvRdNqTY/XtTkTDL9XMI/AAAAAAAAQ7s/QADb6iYlKAsnnM1B3KRE3IY3lwFo-EptQCK4BGAsYHg/cochin%2Bship%2Byard.png"
-                alt="Cochin Shipyard"
-                className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
-              />
-              <p className="font-bold text-sm">Cochin Shipyard Ltd</p>
-            </div>
-            <div className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://tse1.mm.bing.net/th/id/OIP.pxTAVwUAA3VMLLrp1Nj6ogHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="HOCL"
-                className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
-              />
-              <p className="font-bold text-sm">HOCL</p>
-            </div>
-          </div>
+  {clients?.map((client: any) => (
+    <div 
+      key={client._id} 
+      className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all"
+    >
+      <img
+        src={urlFor(client.logo).url()}
+        alt={client.name}
+        className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
+      />
+      <p className="font-bold text-sm">{client.name}</p>
+    </div>
+  ))}
+</div>
         </section>
 
         <div id="featured-wrapper" className="relative h-[200vh]">
