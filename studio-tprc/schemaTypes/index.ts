@@ -1,4 +1,3 @@
-import hero from './hero'
-import client from './client' // Make sure you created client.ts in this folder
+import client from './client' 
 
-export const schemaTypes = [hero, client]
+export const schemaTypes = [client]

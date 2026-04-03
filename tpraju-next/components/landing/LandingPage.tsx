@@ -488,20 +488,19 @@ export function LandingPage({ clients }: { clients: any[] }) {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-  {clients?.map((client: any) => (
-    <div 
-      key={client._id} 
-      className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all"
-    >
-      <img
-        src={urlFor(client.logo).url()}
-        alt={client.name}
-        className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
-      />
-      <p className="font-bold text-sm">{client.name}</p>
-    </div>
-  ))}
-</div>
+            {clients?.map((client: any) => (
+              <div 
+                key={client._id} 
+                className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
+                <img
+                  src={urlFor(client.logo).url()}
+                  alt={client.name}
+                  className="h-12 object-contain grayscale group-hover:grayscale-0 transition-all"
+                />
+                <p className="font-bold text-sm">{client.name}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <div id="featured-wrapper" className="relative h-[200vh]">
