@@ -7,7 +7,7 @@ export default async function Home() {
     client.fetch(`*[_type == "majorClient"]{_id, name, logo}`),
     client.fetch(`*[_type == "project"] | order(_createdAt desc) {_id, title, category, description, image}`), 
     client.fetch(`*[_type == "galleryItem"] | order(_createdAt desc)`)
-
+  ]);
   return (
     <LandingPage 
       clients={clients || []} 

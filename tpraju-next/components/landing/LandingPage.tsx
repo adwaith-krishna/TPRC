@@ -34,7 +34,7 @@ const CERT2 =
 const CERT3 =
   "https://img.freepik.com/free-vector/certificate-template-design_53876-59041.jpg";
 
-export function LandingPage({ clients }: { clients: any[] }) {
+export function LandingPage({ clients, projects }: { clients: any[], projects: any[] }) {
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const pausedSlidersRef = useRef(new Set<string>());
@@ -517,24 +517,24 @@ export function LandingPage({ clients }: { clients: any[] }) {
               id="featured-track"
               className="flex gap-8 px-6 md:px-20 w-max"
             >
-              {clients?.map((client: any) => (
+              {projects?.map((project: any) => (
 
               <div className="min-w-[400px] md:min-w-[600px] snap-center">
                 <div className="group relative overflow-hidden rounded-2xl aspect-[16/9]">
                   <div className="absolute inset-0 bg-charcoal/40 group-hover:bg-charcoal/20 transition-[background-color,opacity] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] z-10" />
                   <div
                     className="w-full h-full bg-center bg-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06]"
-                    style={{ backgroundImage: `url("${urlFor(client.logo).url()}")` }}
+                    style={{ backgroundImage: `url("${urlFor(project.image).url()}")` }}
                   />
                   <div className="absolute bottom-0 left-0 p-10 z-20">
                     <span className="bg-primary text-charcoal px-4 py-1 rounded-full text-xs font-bold mb-4 inline-block">
-                      {client.name}
+                      {project.category}
                     </span>
                     <h3 className="text-white text-3xl font-black">
-                    {client.name}
+                    {project.title}
                     </h3>
                     <p className="text-white/80 mt-2">
-                    {client.name}
+                    {project.description}
                     </p>
                   </div>
                 </div>
