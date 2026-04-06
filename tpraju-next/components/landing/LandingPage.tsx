@@ -38,7 +38,7 @@ const CERT2 =
 const CERT3 =
   "https://img.freepik.com/free-vector/certificate-template-design_53876-59041.jpg";
 
-export function LandingPage({ clients, projects }: { clients: any[], projects: any[] }) {
+export function LandingPage({ clients, projects, gallery, products }: { clients: any[], projects: any[], gallery: any[], products: any[] }) {
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const pausedSlidersRef = useRef(new Set<string>());
