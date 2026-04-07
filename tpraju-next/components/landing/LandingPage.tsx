@@ -38,11 +38,185 @@ const CERT2 =
 const CERT3 =
   "https://img.freepik.com/free-vector/certificate-template-design_53876-59041.jpg";
 
+const HARDCODED_CATEGORIES = [
+  {
+    id: "scaffolding",
+    number: "01",
+    name: "Scaffolding Materials",
+    products: [
+      {
+        id: "p1",
+        name: "Steel Pipes",
+        subtitle: "40NB & 50NB Grade",
+        tag: "Standard Size",
+        image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p2",
+        name: "Walkway Boards",
+        subtitle: "Galvanized Anti-Slip",
+        tag: "Heavy Duty",
+        image: "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p3",
+        name: "Cuplock Standards",
+        subtitle: "High Tensile Steel",
+        tag: "Verticals",
+        image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p4",
+        name: "Cuplock Ledgers",
+        subtitle: "Horizontal Support",
+        tag: "Horizontals",
+        image: "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p5",
+        name: "Joint Pins",
+        subtitle: "Pipe Connection",
+        tag: "Fittings",
+        image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p6",
+        name: "Base Plates",
+        subtitle: "Foundation Support",
+        tag: "Base Setup",
+        image: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  {
+    id: "access",
+    number: "02",
+    name: "Access Equipment",
+    products: [
+      {
+        id: "p7",
+        name: "Step Ladders",
+        subtitle: "Aluminum Alloy Grade",
+        tag: "L-Type",
+        image: "https://img.freepik.com/premium-photo/industrial-power-tool-worker-using-angle-grinder-with-sparks-flying_53876-130005.jpg?w=800"
+      },
+      {
+        id: "p8",
+        name: "Couplers & Fittings",
+        subtitle: "Forged Right Angle",
+        tag: "EN-74 Certified",
+        image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p9",
+        name: "Base Jacks",
+        subtitle: "Adjustable Support",
+        tag: "Heavy Duty",
+        image: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p10",
+        name: "U-Head Jacks",
+        subtitle: "Top Support",
+        tag: "Adjustable",
+        image: "https://img.freepik.com/free-photo/closeup-photo-worker-welding-metal-with-sparks-factory_181624-9122.jpg?w=800"
+      },
+      {
+        id: "p11",
+        name: "Mobile Towers",
+        subtitle: "Aluminum Scaffolding",
+        tag: "Rolling",
+        image: "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "p12",
+        name: "Prop Jacks",
+        subtitle: "Telescopic Steel",
+        tag: "Supports",
+        image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  // {
+  //   id: "industrial",
+  //   number: "03",
+  //   name: "Power & Hand Tools",
+  //   products: [
+  //     {
+  //       id: "p13",
+  //       name: "Impact Drills",
+  //       subtitle: "Heavy Duty Motors",
+  //       tag: "Power Tools",
+  //       image: "https://img.freepik.com/premium-photo/industrial-power-tool-worker-using-angle-grinder-with-sparks-flying_53876-130005.jpg?w=800"
+  //     },
+  //     {
+  //       id: "p14",
+  //       name: "Angle Grinders",
+  //       subtitle: "Professional Grade",
+  //       tag: "Cutting",
+  //       image: "https://img.freepik.com/free-photo/closeup-photo-worker-welding-metal-with-sparks-factory_181624-9122.jpg?w=800"
+  //     },
+  //     {
+  //       id: "p15",
+  //       name: "Rotary Hammers",
+  //       subtitle: "Concrete Drilling",
+  //       tag: "Demolition",
+  //       image: "https://img.freepik.com/free-photo/view-professional-industrial-vacuum-cleaner_23-2150171221.jpg?w=800"
+  //     },
+  //     {
+  //       id: "p16",
+  //       name: "Cordless Wrenches",
+  //       subtitle: "Lithium Ion Battery",
+  //       tag: "Fastening",
+  //       image: "https://img.freepik.com/free-photo/auto-mechanic-repairman-using-wrench_1303-26466.jpg?w=800"
+  //     },
+  //     {
+  //       id: "p17",
+  //       name: "Circular Saws",
+  //       subtitle: "Wood & Metal",
+  //       tag: "Cutting Tool",
+  //       image: "https://img.freepik.com/premium-photo/industrial-power-tool-worker-using-angle-grinder-with-sparks-flying_53876-130005.jpg?w=800"
+  //     },
+  //     {
+  //       id: "p18",
+  //       name: "Laser Levels",
+  //       subtitle: "Precision Measurement",
+  //       tag: "Alignment",
+  //       image: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=800&q=80"
+  //     }
+  //   ]
+  // }
+];
+
 export function LandingPage({ clients, projects, gallery, products }: { clients: any[], projects: any[], gallery: any[], products: any[] }) {
+  const [activeTab, setActiveTab] = useState(HARDCODED_CATEGORIES[0].id);
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const pausedSlidersRef = useRef(new Set<string>());
   const sliderStateRef = useRef<Record<string, number>>({ cat1: 0, cat2: 0 });
+  const productScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollProductsLeft = () => {
+    if (productScrollRef.current) {
+      const cardWidth = (productScrollRef.current.children[0] as HTMLElement)?.offsetWidth || 300;
+      const gap = 24;
+      productScrollRef.current.scrollBy({ left: -(cardWidth + gap), behavior: "smooth" });
+    }
+  };
+
+  const scrollProductsRight = () => {
+    if (productScrollRef.current) {
+      const cardWidth = (productScrollRef.current.children[0] as HTMLElement)?.offsetWidth || 300;
+      const gap = 24;
+      productScrollRef.current.scrollBy({ left: cardWidth + gap, behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    if (productScrollRef.current) {
+      productScrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  }, [activeTab]);
 
   const openCertificate = useCallback((src: string) => setCertSrc(src), []);
   const closeCertificate = useCallback(() => setCertSrc(null), []);
@@ -299,12 +473,12 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
             >
               Products
             </a>
-            <a
+            {/* <a
               className="text-sm font-semibold hover:text-primary transition-colors"
               href="#"
             >
               Gallery
-            </a>
+            </a> */}
           </nav>
           <button
             type="button"
@@ -337,14 +511,14 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
             <div className="flex flex-wrap gap-4">
               <button
                 type="button"
-                className="bg-primary hover:bg-yellow-500 text-charcoal px-8 py-4 rounded-xl font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
+                className="bg-primary hover:bg-yellow-500 text-charcoal px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
               >
                 Contact Us{" "}
                 <span className="material-symbols-outlined">arrow_forward</span>
               </button>
               <button
                 type="button"
-                className="border-2 border-charcoal/10 dark:border-white/10 hover:bg-charcoal hover:text-white dark:hover:bg-white dark:hover:text-charcoal px-8 py-4 rounded-xl font-bold text-base transition-all"
+                className="border-2 border-charcoal/10 dark:border-white/10 hover:bg-charcoal hover:text-white dark:hover:bg-white dark:hover:text-charcoal px-8 py-4 rounded-full font-bold text-base transition-all"
               >
                 View Products
               </button>
@@ -499,10 +673,10 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
                 className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
                 <img
                   src={urlFor(client.logo)
-                    .height(48) 
-                    .fit('max') 
-                    .auto('format') 
-                    .quality(80) 
+                    .height(48)
+                    .fit('max')
+                    .auto('format')
+                    .quality(80)
                     .url()}
                   alt={client.name}
                   className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
@@ -529,7 +703,7 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
             >
               {projects?.map((project: any) => (
 
-                <div className="min-w-[400px] md:min-w-[600px] snap-center">
+                <div key={project._id} className="min-w-[400px] md:min-w-[600px] snap-center">
                   <div className="group relative overflow-hidden rounded-2xl aspect-[16/9]">
                     <div className="absolute inset-0 bg-charcoal/40 group-hover:bg-charcoal/20 transition-[background-color,opacity] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] z-10" />
                     <div
@@ -626,99 +800,87 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
           </div>
         </section> */}
 
-        {/* -----------------------------------product start--------------------------------- */}
-
         <section className="px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4">Industrial Hardware Store</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and
-              scaffolding components certified for heavy-duty industrial use.</p>
+            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use.</p>
           </div>
-          {/* <!-- Grouped Products Layout --> */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
 
-            {/* <!-- Scaffolding Materials --> */}
-            <div>
-              <h3 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-200">Scaffolding Materials</h3>
-              <div className="grid grid-cols-2 gap-6 lg:gap-8">
-                {/* <!-- Product Card 1 --> */}
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all group">
-                  <div
-                    className="bg-gray-50 dark:bg-gray-900 rounded-xl aspect-[4/3] flex items-center justify-center mb-6 overflow-hidden">
-                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                      data-alt="Galvanized scaffolding steel pipes bundles"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu-rukwQgq2R9R2wL_U7k3UdL4dYt4X6n8Zvlo_1Kq_qDihl6Jjo94RsncUxAD5KbItuyOtIRBaEGxDZrQHmGTP3me_wdYbGhITU4AmckGoQDDMYAWq0efCsdt4WV77oun9Zrl9FhP3YZ7lT4lJCB0z2BW82Kduyt1KT8j7vjYnGtzQX_0gnfb1G8lzNR9d7KwZUtK5gWYO4I00pXRu3NUxA-AguLiQf00B3ciTcGWnZ4oteNvToOGAcn7ZLUuURQGnqXB4q8Fs31-" />
-                  </div>
-                  <h3 className="font-bold text-lg">Steel Pipes</h3>
-                  <p className="text-sm text-gray-500 mb-4">40NB &amp; 50NB Grade</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-primary font-bold">Standard Size</span>
-                    {/* <button className="size-10 rounded-full bg-charcoal text-white flex items-center justify-center">
-                  <span className="material-symbols-outlined text-sm">add</span>
-                </button> */}
-                  </div>
-                </div>
-                {/* <!-- Product Card 2 --> */}
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all group">
-                  <div
-                    className="bg-gray-50 dark:bg-gray-900 rounded-xl aspect-[4/3] flex items-center justify-center mb-6 overflow-hidden">
-                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                      data-alt="Industrial metal walking boards/planks"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF436iPHDOM4SsH_3PbrTaqpU4BL7vEZdEudZe0iMUuxTK0KQTNuVllF5vmUKFpoEh54p8Hku4OTSp-IDTXXfXMTMsCuXXmmfeE7vBw4kAjJQGJJjSlJqvs2TZ9Md4xqMbcaCGLQhZIX0sG1xx-7PdsQtOIsl5v8HckAgpSLrVqYEb8rOFfYYBQr4km7-qyi--5swXvcrQKZqQmzyqvB6aBM61-Hxsre7WVujvrx7zAWpxcluHG0iDkktkfxNfYW5AHQJrlWBwcuz5" />
-                  </div>
-                  <h3 className="font-bold text-lg">Walkway Boards</h3>
-                  <p className="text-sm text-gray-500 mb-4">Galvanized Anti-Slip</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-primary font-bold">Heavy Duty</span>
-                    {/* <button className="size-10 rounded-full bg-charcoal text-white flex items-center justify-center">
-                  <span className="material-symbols-outlined text-sm">add</span>
-                </button> */}
-                  </div>
-                </div>
-              </div>
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+            {/* <!-- Left Column: Tabs --> */}
+            <div className="lg:w-1/3 flex flex-col justify-top gap-4 ">
+              {HARDCODED_CATEGORIES.map((category) => {
+                const isActive = activeTab === category.id;
+                return (
+                  <button
+                    key={category.id}
+                    onClick={() => setActiveTab(category.id)}
+                    className={`flex items-center justify-center lg:justify-start gap-4 p-4 lg:py-4 lg:px-0 transition-all duration-300 ${isActive
+                      ? ''
+                      : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                      }`}
+                  >
+                    <span className={`text-3xl lg:text-4xl font-black transition-colors ${isActive ? 'text-primary' : 'text-gray-300 dark:text-gray-700'}`}>
+                      {category.number}
+                    </span>
+                    <span className={`text-lg md:text-xl font-bold text-left transition-colors ${isActive ? 'text-charcoal dark:text-white' : ''}`}>
+                      {category.name}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Name<!-- Access Equipment & Accessories --> */}
-            <div>
-              <h3 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-200">Access Equipment</h3>
-              <div className="grid grid-cols-2 gap-6 lg:gap-8">
-                {/* <!-- Product Card 3 --> */}
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all group">
+            {/* <!-- Right Column: Product Cards Carousel --> */}
+            <div className="lg:w-2/3 flex flex-col">
+              <div
+                ref={productScrollRef}
+                className="flex gap-4 lg:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6"
+              >
+                {HARDCODED_CATEGORIES.find(c => c.id === activeTab)?.products.map((product) => (
                   <div
-                    className="bg-gray-50 dark:bg-gray-900 rounded-xl aspect-[4/3] flex items-center justify-center mb-6 overflow-hidden">
-                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                      data-alt="Aluminium industrial extension ladders"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1-MAorCmAzUP59OAdV8rQDpKgA3RJRAYeknuXi45gkEoGOFbQ7MMzM9iJNjUIwYICDh3UhnzHuUVdTXm6G_e5gAQqCS27N1u-y1QocicQEHh_6LOR3SU1bFg8RiJv_hhuPUOGSIwpJmP5wOdTGZrLOOKhfXQowY2Gq3ghv10e_zWAjThH3sw6deN5OyL4s7pBUa_leVVxxk2DH_NaraHNHT-ntAzmFBgXTZsTH4NICM6sVxHR6fETmriFhZzyniSU14QOPDPtA75z" />
+                    key={product.id}
+                    className="w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start bg-white dark:bg-gray-800 p-4 lg:p-5 rounded-2xl shadow-sm hover:shadow-xl transition-all group animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col"
+                  >
+                    <div className="bg-gray-50 dark:bg-gray-900 rounded-lg aspect-[4/3] flex items-center justify-center mb-4 overflow-hidden">
+                      <img
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        alt={product.name}
+                        src={product.image}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-base lg:text-lg mb-1 leading-tight truncate">{product.name}</h3>
+                      <p className="text-xs lg:text-sm text-gray-500 mb-4 truncate">{product.subtitle}</p>
+                    </div>
+                    <div className="flex justify-between items-center border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
+                      <span className="text-primary font-bold text-xs lg:text-sm tracking-wide">{product.tag}</span>
+                      {/* <button className="size-8 lg:size-10 rounded-full bg-background-light dark:bg-background-dark group-hover:bg-primary group-hover:text-charcoal flex items-center justify-center transition-colors shrink-0">
+                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                      </button> */}
+                    </div>
                   </div>
-                  <h3 className="font-bold text-lg">Step Ladders</h3>
-                  <p className="text-sm text-gray-500 mb-4">Aluminum Alloy Grade</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-primary font-bold">L-Type</span>
-                    {/* <button className="size-10 rounded-full bg-charcoal text-white flex items-center justify-center">
-                  <span className="material-symbols-outlined text-sm">add</span>
-                </button> */}
-                  </div>
-                </div>
-                {/* <!-- Product Card 4 --> */}
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all group">
-                  <div
-                    className="bg-gray-50 dark:bg-gray-900 rounded-xl aspect-[4/3] flex items-center justify-center mb-6 overflow-hidden">
-                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                      data-alt="Assorted scaffolding metal fittings and clamps"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjRPxexIKGfOp9TFss2EOpGC1IJfiH5-breVQzNRJYjawi5hQRNPgNlf3gnSgbTkx-a_EcoQYZK89PfacFcqczPDJE8wx2aydjS2RNOs-YKAnJIIUydHymWLMkzETVA-F9Zeh3_WRSccc5y2MmZiNP5WuVd1yPx5UxTP-gqlqYuyVHNUXqNjEPcDA1Y0ELkA8Z5-doFhq4uvbvTPsZ4aETBqnDUOX6nAalxzRC10XOQuSZIkZ0i3rIFoPiPpJ-TOsJl0ZurmdYIYI-" />
-                  </div>
-                  <h3 className="font-bold text-lg">Couplers &amp; Fittings</h3>
-                  <p className="text-sm text-gray-500 mb-4">Forged Right Angle</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-primary font-bold">EN-74 Certified</span>
-                    {/* <button className="size-10 rounded-full bg-charcoal text-white flex items-center justify-center">
-                  <span className="material-symbols-outlined text-sm">add</span>
-                </button> */}
-                  </div>
-                </div>
+                ))}
+              </div>
+
+              {/* <!-- Scroll Controls --> */}
+              <div className="flex justify-end gap-3 mt-4">
+                <button
+                  onClick={scrollProductsLeft}
+                  className="size-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-primary hover:text-charcoal hover:border-primary transition-all text-gray-500 hover:text-charcoal dark:text-gray-400"
+                  aria-label="Scroll left"
+                >
+                  <span className="material-symbols-outlined">arrow_back</span>
+                </button>
+                <button
+                  onClick={scrollProductsRight}
+                  className="size-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-primary hover:text-charcoal hover:border-primary transition-all text-gray-500 hover:text-charcoal dark:text-gray-400"
+                  aria-label="Scroll right"
+                >
+                  <span className="material-symbols-outlined">arrow_forward</span>
+                </button>
               </div>
             </div>
-
           </div>
         </section>
         {/* ----------------------------------------------------------product end-------------------------------- */}
@@ -734,42 +896,67 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
               large-scale engineering operations across India.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <GalleryImage src="https://img.freepik.com/premium-photo/workers-ascending-metal-maze-realistic-depiction-scaffolding-climbing-candid-daily-wo_980716-109649.jpg?w=2000" />
-            <GalleryImage src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" />
-            <div className="group relative aspect-square overflow-hidden rounded-2xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[240px] gap-4 md:gap-6">
+            <GalleryImage
+              src="https://img.freepik.com/premium-photo/workers-ascending-metal-maze-realistic-depiction-scaffolding-climbing-candid-daily-wo_980716-109649.jpg?w=2000"
+              className="col-span-2 row-span-2"
+            />
+            <GalleryImage
+              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80"
+              className="col-span-2 row-span-1"
+            />
+            <div className="col-span-1 row-span-1 group relative overflow-hidden shadow-sm hover:shadow-xl transition-all">
               <video
                 src="https://www.w3schools.com/html/mov_bbb.mp4"
-                className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06]"
+                className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06] block"
                 autoPlay
                 muted
                 loop
                 playsInline
               />
+              <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] pointer-events-none" />
             </div>
-            <GalleryImage src="https://cdn.pixabay.com/photo/2023/09/14/09/07/scaffolding-8252585_960_720.jpg" />
-            <GalleryImage src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=80" />
-            <div className="group relative aspect-square overflow-hidden rounded-2xl">
+            <GalleryImage
+              src="https://cdn.pixabay.com/photo/2023/09/14/09/07/scaffolding-8252585_960_720.jpg"
+              className="col-span-1 row-span-1"
+            />
+
+            <GalleryImage
+              src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=80"
+              className="col-span-1 row-span-2 hidden md:block"
+            />
+            <div className="col-span-2 row-span-2 group relative overflow-hidden shadow-sm hover:shadow-xl transition-all">
               <video
                 src="https://www.w3schools.com/html/movie.mp4"
-                className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06]"
+                className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06] block"
                 autoPlay
                 muted
                 loop
                 playsInline
               />
+              <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] pointer-events-none" />
             </div>
-            <GalleryImage src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=900&q=80" />
-            <GalleryImage src="https://img.freepik.com/premium-photo/construction-workers-working-construction-site_891336-3566.jpg" />
+            <GalleryImage
+              src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=900&q=80"
+              className="col-span-1 row-span-1"
+            />
+            <GalleryImage
+              src="https://img.freepik.com/premium-photo/construction-workers-working-construction-site_891336-3566.jpg"
+              className="col-span-1 row-span-1"
+            />
+            <GalleryImage
+              src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=80"
+              className="col-span-2 row-span-1 md:hidden"
+            />
           </div>
-          <div className="flex justify-center mt-16">
+          {/* <div className="flex justify-center mt-16">
             <Link
               href="/gallery"
               className="bg-primary hover:bg-yellow-500 text-charcoal px-10 py-4 rounded-xl font-bold transition-all shadow-lg shadow-primary/20"
             >
               View Full Gallery
             </Link>
-          </div>
+          </div> */}
         </section>
 
         <section className="px-6 md:px-20 py-10 lg:py-28 bg-background-light dark:bg-background-dark">
@@ -1119,16 +1306,17 @@ function ProductSlide({
   );
 }
 
-function GalleryImage({ src }: { src: string }) {
+function GalleryImage({ src, className = "" }: { src: string; className?: string }) {
   return (
-    <div className="group relative aspect-square overflow-hidden rounded-2xl">
+    <div className={`group relative overflow-hidden shadow-sm hover:shadow-xl transition-all ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt=""
-        className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06]"
+        loading="lazy"
+        className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06] block"
       />
-      <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]" />
+      <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] pointer-events-none" />
     </div>
   );
 }
