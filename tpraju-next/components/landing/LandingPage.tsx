@@ -723,12 +723,12 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           <div className="relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white dark:from-zinc-900/50 to-transparent z-10"></div>
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-zinc-900/50 to-transparent z-10"></div>
-            <div className="flex animate-scroll">
+            <div className="flex w-max animate-scroll">
               {/* First set of clients */}
               {clients?.map((client: Client) => (
                 <div
                   key={`first-${client._id}`}
-                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
+                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-40 mr-4"
                 >
                   <img
                     src={urlFor(client.logo)
@@ -747,7 +747,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               {clients?.map((client: Client) => (
                 <div
                   key={`second-${client._id}`}
-                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
+                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-40 mr-4"
                 >
                   <img
                     src={urlFor(client.logo)
