@@ -438,6 +438,13 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           totalProgress += progresses[j];
         }
 
+        const laterVisibleCount = progresses.slice(i + 1).filter((value) => value > 0.05).length;
+        const hideOldCard = laterVisibleCount >= 4;
+        const wrapperEl = wrapper as HTMLElement;
+        wrapperEl.style.visibility = hideOldCard ? "hidden" : "visible";
+        wrapperEl.style.pointerEvents = hideOldCard ? "none" : "auto";
+        wrapperEl.style.opacity = hideOldCard ? "0" : "1";
+
         const scale = Math.max(0.7, 1 - totalProgress * 0.05);
         inner.style.transform = `scale(${scale})`;
 
@@ -776,7 +783,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 <div
                   key={project._id}
                   className="project-card-wrapper sticky origin-top w-full max-w-4xl mx-auto"
-                  style={{ top: '100px', transform: `translateY(${index * 40}px)` }}
+                  style={{ top: '100px', zIndex: index + 1 }}
                 >
                   <div className="project-card-inner group relative overflow-hidden rounded-[2rem] shadow-[0_-8px_30px_rgba(0,0,0,0.12)] border border-gray-100/50 dark:border-gray-700/50 aspect-[16/9] md:aspect-[16/9] bg-white dark:bg-zinc-800 origin-top">
                     <div className="absolute inset-0 bg-black pointer-events-none z-30 tint-overlay" style={{ opacity: 0 }} />
