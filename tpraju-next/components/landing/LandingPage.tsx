@@ -5,7 +5,6 @@ import {
   useEffect,
   useRef,
   useState,
-  type SubmitEventHandler,
 } from "react";
 import { CertificateModal } from "./CertificateModal";
 import { ShareFloating } from "./ShareFloating";
@@ -186,7 +185,7 @@ const FALLBACK_GALLERY_ITEMS = [
 ];
 
 // Helper function to transform Sanity gallery items
-const transformGalleryItems = (galleryItems: GalleryItem[]) => {
+const transformGalleryItems = (galleryItems: GalleryItem[]): TransformedGalleryItem[] => {
   if (!galleryItems || galleryItems.length === 0) {
     return FALLBACK_GALLERY_ITEMS;
   }
@@ -227,6 +226,14 @@ const transformGalleryItems = (galleryItems: GalleryItem[]) => {
     };
   });
 };
+
+interface TransformedGalleryItem {
+  id: string;
+  mediaType: string;
+  src: string;
+  gridClass: string;
+  title: string;
+}
 
 interface LandingPageProps {
   clients: Client[];
@@ -412,13 +419,9 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
     ta.style.height = `${ta.scrollHeight}px`;
   };
 
-  const pauseScroll = (id: string) => pausedSlidersRef.current.add(id);
-  const resumeScroll = (id: string) => pausedSlidersRef.current.delete(id);
-
   useEffect(() => {
     const handleScroll = () => {
       const wrappers = document.querySelectorAll(".project-card-wrapper");
-      const container = document.getElementById("projects-stack-container");
 
       const progresses = Array.from(wrappers).map((wrapper, i) => {
         const stickPoint = 100 + i * 40;
@@ -722,7 +725,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-zinc-900/50 to-transparent z-10"></div>
             <div className="flex animate-scroll">
               {/* First set of clients */}
-              {clients?.map((client: any) => (
+              {clients?.map((client: Client) => (
                 <div
                   key={`first-${client._id}`}
                   className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
@@ -741,7 +744,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 </div>
               ))}
               {/* Duplicate set for seamless loop */}
-              {clients?.map((client: any) => (
+              {clients?.map((client: Client) => (
                 <div
                   key={`second-${client._id}`}
                   className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
@@ -778,7 +781,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             className="flex flex-col gap-12 px-6 md:px-20"
             style={{ paddingBottom: projects ? `${(projects.length - 1) * 40}px` : '0px' }}
           >
-            {projects?.map((project: any, index: number) => {
+            {projects?.map((project: Project, index: number) => {
               return (
                 <div
                   key={project._id}
@@ -815,7 +818,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
 
 
-        
+
 
         <section className="relative z-10 px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
           <div className="text-center mb-16">
@@ -855,12 +858,12 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 className="flex gap-4 lg:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6"
               >
                 {categories.find(c => c.id === activeTab)?.products.map((product: {
-                    id: string;
-                    name: string;
-                    subtitle?: string;
-                    tag?: string;
-                    image: string;
-                  }) => (
+                  id: string;
+                  name: string;
+                  subtitle?: string;
+                  tag?: string;
+                  image: string;
+                }) => (
                   <div
                     key={product.id}
                     className="w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start bg-white dark:bg-gray-800 p-4 lg:p-5 rounded-2xl shadow-sm hover:shadow-xl transition-all group animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col"
@@ -920,7 +923,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-[150px] md:auto-rows-[200px] gap-3 md:gap-4">
-            {galleryItems.map((item: any) =>
+            {galleryItems.map((item: TransformedGalleryItem) =>
               item.mediaType === 'video' ? (
                 <div key={item.id} className={`group relative overflow-hidden rounded-lg transition-all duration-500 hover:scale-105 ${item.gridClass}`}>
                   <video
@@ -1259,31 +1262,6 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
       <CertificateModal src={certSrc} onClose={closeCertificate} />
     </>
-  );
-}
-
-function ProductSlide({
-  img,
-  title,
-  subtitle,
-}: {
-  img: string;
-  title: string;
-  subtitle: string;
-}) {
-  return (
-    <div className="product-item relative w-full min-w-[510px] h-[220px] rounded-2xl overflow-hidden group flex-shrink-0 snap-center">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={img}
-        alt=""
-        className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06]"
-      />
-      <div className="absolute bottom-0 left-0 w-full bg-black/70 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-[600ms] ease-[cubic-bezier(0.32,0.72,0,1)]">
-        <h4 className="font-bold text-lg">{title}</h4>
-        <p className="text-sm opacity-80">{subtitle}</p>
-      </div>
-    </div>
   );
 }
 
