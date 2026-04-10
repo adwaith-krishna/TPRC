@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   useCallback,
   useEffect,
@@ -15,21 +14,13 @@ import { urlFor } from "@/lib/sanity.image";
 import { sendContactEmail } from "@/app/actions/contact";
 
 import { TPRCLoader } from "./LoadingScreen";
+import { Project, Product, GalleryItem, Client } from "@/types/sanity";
 
 const HERO_BG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuCWASYnz6kODAfg1YQ7cNgUaCc6Qf64cMUfUHa-QNDn1FrMKLUdQdl3YTQHI8hCfUECTGZghv4-X3PzmTWa1V3QJOSi4ifkXFl9DBLxqsCjjWkGdPK2iQIFEFWmJ_Be1ygq8HgEgr-tk8-CPTuhtc4DjiKfL4OnIogfAvI4svCNTlMf5nNGIFUPaIUwtjhC0vjyHufhH0MTJwT3Z9r8iuUVLhjnrFHeJNJ3rsijo4Z820RAIbo4bSFdhdM--vU7TxWWDxHSErUfIfM7";
 
 const ABOUT_IMG =
   "https://img.freepik.com/premium-photo/tall-building-with-crane-top-it_662214-417885.jpg";
-
-const FEAT1 =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAPXfhKDsJ2_4ZDt2FwW4KBY1C2IQQkaGo3yJ5GDYpSn86anHbZC82iTvPQ-eJG2UU-ieKjIV3kV3an1bIlL1ojQ6XhcdPqAcsVJE5oscfhQP9Z__gpOx1XTv1z9uP-LofCNlYdBXhRYYH52PvbvhUQmFeveq-1U539QxWYS5smOy_dZluAQIKmOMgW8lYgmgwE6yMxBeizhvvu7uK_Rrkq-PHbBDvjPV4jJO61Raluu3O82crKIlKhaYwlmv_9gETEdmDWd4uKkmlZ";
-
-const FEAT2 =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuBB30CYzqJ8Irmq_dU-HpoJg03XeZC4Drlo8gL-THfDzCR4YPJxNx-NUs3dQuCuuG3fietzebj0ZDsReozy7aEED7mrXCgw-rAmn1tZrmdGbBqMhqCPyhd6C1gDVksjZryOcwvvVrMqJXQr2pMgL_6l-wKTPgDuA4-pacDVJzl4AzELnI0nyP3jBLAaEXwHIf5EvGu6ZUqlmAdC38Sk24NZOgfRXo74FVgigcx9V-nhsVKbH4S7EkterR9oWPMy0MsoQpxfIEORYmhD";
-
-const FEAT3 =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuBAkmJ-23UOvacuJ_1BKhI6TyJzrmVDqnCxVWAFFPlgWHMRlkw-xa1Cuh1WZ_5brf_N3kg85Gl7yCrPP4JXy74CDXRWb4gM5a15xg5J6eVYJDvATGFAn35RZXInhYc1SF3SPA9Am0QQOtQRb7A_Ad2gzFTueLvTTQ8qjLSgUmg1xTfblnLx1xPgrYWEHlXU8DumAYGgFGwXZ8ki2mYt5S18k7-m19Rmv4l88uoyXrqzY66XWLxOnTuLv7jQsX0lxpaD345rJJM10tTW";
 
 const CERT1 =
   "https://img.freepik.com/free-vector/certificate-template-design_53876-59034.jpg";
@@ -141,13 +132,24 @@ const FALLBACK_CATEGORIES = [
 ];
 
 // Helper function to transform Sanity products into categories
-const transformProductsToCategories = (products: any[]) => {
+const transformProductsToCategories = (products: Product[]) => {
   if (!products || products.length === 0) {
     return FALLBACK_CATEGORIES;
   }
 
   // Group products by category
-  const grouped = products.reduce((acc: Record<string, any>, product: any) => {
+  const grouped = products.reduce((acc: Record<string, {
+    id: string;
+    number: string;
+    name: string;
+    products: {
+      id: string;
+      name: string;
+      subtitle?: string;
+      tag?: string;
+      image: string;
+    }[];
+  }>, product: Product) => {
     const categoryKey = product.categoryName || "Uncategorized";
     if (!acc[categoryKey]) {
       acc[categoryKey] = {
@@ -184,16 +186,20 @@ const FALLBACK_GALLERY_ITEMS = [
 ];
 
 // Helper function to transform Sanity gallery items
-const transformGalleryItems = (galleryItems: any[]) => {
+const transformGalleryItems = (galleryItems: GalleryItem[]) => {
   if (!galleryItems || galleryItems.length === 0) {
     return FALLBACK_GALLERY_ITEMS;
   }
 
   // Map through gallery items and optimize media
-  return galleryItems.map((item: any, index: number) => {
+  return galleryItems.map((item: GalleryItem, index: number) => {
     let src = '';
     if (item.mediaType === 'image' && item.image) {
-      src = urlFor(item.image).url();
+      src = urlFor(item.image)
+        .width(800)
+        .quality(80)
+        .auto('format')
+        .url();
     } else if (item.mediaType === 'video' && item.videoUrl) {
       src = item.videoUrl;
     }
@@ -222,7 +228,14 @@ const transformGalleryItems = (galleryItems: any[]) => {
   });
 };
 
-export function LandingPage({ clients, projects, gallery, products }: { clients: any[], projects: any[], gallery: any[], products: any[] }) {
+interface LandingPageProps {
+  clients: Client[];
+  projects: Project[];
+  gallery: GalleryItem[];
+  products: Product[];
+}
+
+export function LandingPage({ clients, projects, gallery, products }: LandingPageProps) {
   // Transform Sanity products into categories
   const categories = transformProductsToCategories(products);
 
@@ -397,11 +410,6 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
     if (!ta) return;
     ta.style.height = "auto";
     ta.style.height = `${ta.scrollHeight}px`;
-  };
-
-  const onContactSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    alert("Thank you — we will get back to you shortly.");
   };
 
   const pauseScroll = (id: string) => pausedSlidersRef.current.add(id);
@@ -800,75 +808,7 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
 
 
 
-        {/* <section className="px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">Industrial Hardware Store</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
-              We supply premium grade Cuplock systems, pipes, and scaffolding
-              components certified for heavy-duty industrial use.
-            </p>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-10">
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm">
-              <h3 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-200">
-                Product Category 1
-              </h3>
-              <div className="relative">
-                <div
-                  id="cat1"
-                  className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar px-12 py-2 snap-x snap-mandatory"
-                  onMouseEnter={() => pauseScroll("cat1")}
-                  onMouseLeave={() => resumeScroll("cat1")}
-                >
-                  <ProductSlide
-                    img="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
-                    title="Steel Pipes"
-                    subtitle="40NB & 50NB Grade"
-                  />
-                  <ProductSlide
-                    img="https://images.unsplash.com/photo-1513828583688-c52646db42da"
-                    title="Walkway Boards"
-                    subtitle="Heavy Duty"
-                  />
-                  <ProductSlide
-                    img="https://images.unsplash.com/photo-1503387762-592deb58ef4e"
-                    title="Scaffolding Clamps"
-                    subtitle="Industrial Grade"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm">
-              <h3 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-200">
-                Product Category 2
-              </h3>
-              <div className="relative">
-                <div
-                  id="cat2"
-                  className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar px-12 py-2 snap-x snap-mandatory"
-                  onMouseEnter={() => pauseScroll("cat2")}
-                  onMouseLeave={() => resumeScroll("cat2")}
-                >
-                  <ProductSlide
-                    img="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
-                    title="Steel Pipes"
-                    subtitle="40NB & 50NB Grade"
-                  />
-                  <ProductSlide
-                    img="https://images.unsplash.com/photo-1513828583688-c52646db42da"
-                    title="Walkway Boards"
-                    subtitle="Heavy Duty"
-                  />
-                  <ProductSlide
-                    img="https://images.unsplash.com/photo-1503387762-592deb58ef4e"
-                    title="Scaffolding Clamps"
-                    subtitle="Industrial Grade"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
+        
 
         <section className="relative z-10 px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
           <div className="text-center mb-16">
@@ -907,7 +847,13 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
                 ref={productScrollRef}
                 className="flex gap-4 lg:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6"
               >
-                {categories.find(c => c.id === activeTab)?.products.map((product: any) => (
+                {categories.find(c => c.id === activeTab)?.products.map((product: {
+                    id: string;
+                    name: string;
+                    subtitle?: string;
+                    tag?: string;
+                    image: string;
+                  }) => (
                   <div
                     key={product.id}
                     className="w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start bg-white dark:bg-gray-800 p-4 lg:p-5 rounded-2xl shadow-sm hover:shadow-xl transition-all group animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col"
@@ -1046,9 +992,9 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">" </span>
+                <span className="text-primary font-black text-lg">&quot; </span>
                 Their commitment to safety is unparalleled. In our refinery expansion, TP Raju Engineering completed 20,000 man-hours without a single incident.
-                <span className="text-primary font-black text-lg">"</span>
+                <span className="text-primary font-black text-lg">&quot;</span>
               </p>
               <div>
                 <p className="font-black">Ramesh Kumar</p>
@@ -1058,9 +1004,9 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">" </span>
+                <span className="text-primary font-black text-lg">&quot; </span>
                 Excellent material quality and prompt delivery. Their fabrication work for our chemical reactor housing was precise and handled with great care.
-                <span className="text-primary font-black text-lg">"</span>
+                <span className="text-primary font-black text-lg">&quot;</span>
               </p>
               <div>
                 <p className="font-black">S. Venkatesh</p>
@@ -1070,9 +1016,9 @@ export function LandingPage({ clients, projects, gallery, products }: { clients:
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">" </span>
+                <span className="text-primary font-black text-lg">&quot; </span>
                 The rental service is highly efficient. They provided us with specialized cantilever scaffolding that solved a major accessibility challenge.
-                <span className="text-primary font-black text-lg">"</span>
+                <span className="text-primary font-black text-lg">&quot;</span>
               </p>
               <div>
                 <p className="font-black">David Miller</p>
