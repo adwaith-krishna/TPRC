@@ -204,17 +204,18 @@ const transformGalleryItems = (galleryItems: GalleryItem[]) => {
       src = item.videoUrl;
     }
 
-    // Assign grid positions in a cycle to maintain layout variety
+    // Assign grid positions - make larger items for visual interest but keep it simple and scalable
     const gridClasses = [
-      "col-span-2 row-span-2",
-      "col-span-2 row-span-1",
-      "col-span-1 row-span-1",
-      "col-span-1 row-span-1",
-      "col-span-1 row-span-2 hidden md:block",
-      "col-span-2 row-span-2",
-      "col-span-1 row-span-1",
-      "col-span-1 row-span-1",
-      "col-span-2 row-span-1 md:hidden"
+      "col-span-1 row-span-2", // Tall item
+      "col-span-2 row-span-1", // Wide item (on larger screens)
+      "col-span-1 row-span-1", // Normal item
+      "col-span-1 row-span-1", // Normal item
+      "col-span-1 row-span-1", // Normal item
+      "col-span-2 row-span-2", // Large item (on larger screens)
+      "col-span-1 row-span-1", // Normal item
+      "col-span-1 row-span-1", // Normal item
+      "col-span-1 row-span-1", // Normal item
+      "col-span-1 row-span-1"  // Normal item
     ];
 
     return {
@@ -237,10 +238,10 @@ interface LandingPageProps {
 export function LandingPage({ clients, projects, gallery, products }: LandingPageProps) {
   // Transform Sanity products into categories
   const categories = transformProductsToCategories(products);
-  
+
   // Transform Sanity gallery items
   const galleryItems = transformGalleryItems(gallery);
-  
+
   const [activeTab, setActiveTab] = useState(categories[0]?.id || "");
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -294,7 +295,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
       : "cubic-bezier(0.32, 0.72, 0, 1)";
 
     const animatedElements = document.querySelectorAll(
-      "section, .group, .glass, .bg-white, div.bg-background-light, div.bg-background-dark"
+      "section:not(.no-reveal), .group:not(.no-reveal), .glass:not(.no-reveal), .bg-white:not(.no-reveal), div.bg-background-light:not(.no-reveal), div.bg-background-dark:not(.no-reveal)"
     );
 
     const reveal = (h: HTMLElement) => {
@@ -302,6 +303,8 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
       h.style.transform = "translateY(0)";
       window.setTimeout(() => {
         h.style.removeProperty("will-change");
+        h.style.removeProperty("transform");
+        h.style.removeProperty("transition");
       }, REVEAL_MS + 100);
     };
 
@@ -372,65 +375,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
     };
   }, []);
 
-  useEffect(() => {
-    const fWrapper = document.getElementById("featured-wrapper");
-    const fTrack = document.getElementById("featured-track");
-    if (!fWrapper || !fTrack) return;
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    let targetX = 0;
-    let currentX = 0;
-    let rafId: number | null = null;
-
-    const applyTransform = (x: number) => {
-      fTrack.style.transform = `translate3d(-${x}px, 0, 0)`;
-    };
-
-    const tick = () => {
-      const diff = targetX - currentX;
-      if (reduceMotion || Math.abs(diff) < 0.25) {
-        currentX = targetX;
-        applyTransform(currentX);
-        rafId = null;
-        return;
-      }
-      currentX += diff * 0.1;
-      applyTransform(currentX);
-      rafId = requestAnimationFrame(tick);
-    };
-
-    const scheduleTick = () => {
-      if (rafId === null) rafId = requestAnimationFrame(tick);
-    };
-
-    const onScroll = () => {
-      const rect = fWrapper.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      let progress = -rect.top / (rect.height - viewportHeight);
-      progress = Math.max(0, Math.min(1, progress));
-      const maxScroll = Math.max(0, fTrack.scrollWidth - window.innerWidth + 80);
-      targetX = progress * maxScroll;
-      if (reduceMotion) {
-        currentX = targetX;
-        applyTransform(currentX);
-      } else {
-        scheduleTick();
-      }
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (rafId !== null) cancelAnimationFrame(rafId);
-    };
-  }, []);
 
   useEffect(() => {
     const sliderIds = ["cat1", "cat2"];
@@ -469,6 +414,57 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
   const pauseScroll = (id: string) => pausedSlidersRef.current.add(id);
   const resumeScroll = (id: string) => pausedSlidersRef.current.delete(id);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const wrappers = document.querySelectorAll(".project-card-wrapper");
+      const container = document.getElementById("projects-stack-container");
+
+      const progresses = Array.from(wrappers).map((wrapper, i) => {
+        const stickPoint = 100 + i * 40;
+        const distance = wrapper.getBoundingClientRect().top - stickPoint;
+        const trackingDist = window.innerHeight * 0.8;
+        if (distance <= 0) return 1;
+        if (distance >= trackingDist) return 0;
+        return 1 - (distance / trackingDist);
+      });
+
+      wrappers.forEach((wrapper, i) => {
+        const inner = wrapper.querySelector(".project-card-inner") as HTMLElement;
+        if (!inner) return;
+
+        let totalProgress = 0;
+        for (let j = i + 1; j < wrappers.length; j++) {
+          totalProgress += progresses[j];
+        }
+
+        const laterVisibleCount = progresses.slice(i + 1).filter((value) => value > 0.05).length;
+        const hideOldCard = laterVisibleCount >= 4;
+        const wrapperEl = wrapper as HTMLElement;
+        wrapperEl.style.visibility = hideOldCard ? "hidden" : "visible";
+        wrapperEl.style.pointerEvents = hideOldCard ? "none" : "auto";
+        wrapperEl.style.opacity = hideOldCard ? "0" : "1";
+
+        const scale = Math.max(0.7, 1 - totalProgress * 0.05);
+        inner.style.transform = `scale(${scale})`;
+
+        const tintOverlay = inner.querySelector(".tint-overlay") as HTMLElement;
+        if (tintOverlay) {
+          const tint = Math.min(0.8, totalProgress * 0.25);
+          tintOverlay.style.opacity = tint.toString();
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [projects]);
 
   return (
     <>
@@ -721,73 +717,107 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               respected infrastructure, energy, and industrial organizations.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            {clients?.map((client: Client) => (
-              <div
-                key={client._id}
-                className="group bg-background-light dark:bg-background-dark p-8 rounded-xl flex flex-col items-center justify-center gap-4 shadow-sm hover:shadow-xl transition-all">
-                <img
-                  src={urlFor(client.logo)
-                    .height(48)
-                    .fit('max')
-                    .auto('format')
-                    .quality(80)
-                    .url()}
-                  alt={client.name}
-                  className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
-                />
-                <p className="font-bold text-sm">{client.name}</p>
-              </div>
-            ))}
+          <div className="relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white dark:from-zinc-900/50 to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-zinc-900/50 to-transparent z-10"></div>
+            <div className="flex animate-scroll">
+              {/* First set of clients */}
+              {clients?.map((client: any) => (
+                <div
+                  key={`first-${client._id}`}
+                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
+                >
+                  <img
+                    src={urlFor(client.logo)
+                      .height(48)
+                      .fit('max')
+                      .auto('format')
+                      .quality(80)
+                      .url()}
+                    alt={client.name}
+                    className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
+                  />
+                  <p className="font-bold text-sm text-center">{client.name}</p>
+                </div>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {clients?.map((client: any) => (
+                <div
+                  key={`second-${client._id}`}
+                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
+                >
+                  <img
+                    src={urlFor(client.logo)
+                      .height(48)
+                      .fit('max')
+                      .auto('format')
+                      .quality(80)
+                      .url()}
+                    alt={client.name}
+                    className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
+                  />
+                  <p className="font-bold text-sm text-center">{client.name}</p>
+                </div>
+              ))}
+
+
+            </div>
           </div>
         </section>
 
-        <div id="featured-wrapper" className="relative h-[200vh]">
-          <section className="sticky top-[70px] py-20 flex flex-col justify-center overflow-hidden bg-white dark:bg-zinc-900/50">
-            <div className="px-6 md:px-20 mb-12 shrink-0">
-              <h2 className="text-4xl font-black tracking-tight mb-2">
-                Featured Projects
-              </h2>
-              <p className="text-gray-500 uppercase tracking-widest text-xs font-bold">
-                Industry standard excellence
-              </p>
-            </div>
-            <div
-              id="featured-track"
-              className="flex gap-8 px-6 md:px-20 w-max"
-            >
-              {projects?.map((project: Project) => (
-
-                <div key={project._id} className="min-w-[400px] md:min-w-[600px] snap-center">
-                  <div className="group relative overflow-hidden rounded-2xl aspect-[16/9]">
+        <div id="projects-stack-container" className="relative pt-20 pb-10 bg-white dark:bg-zinc-900/50 no-reveal">
+          <div className="px-6 md:px-20 mb-16 shrink-0 text-center">
+            <h2 className="text-4xl font-black tracking-tight mb-2">
+              Featured Projects
+            </h2>
+            <p className="text-gray-500 uppercase tracking-widest text-xs font-bold">
+              Industry standard excellence
+            </p>
+          </div>
+          <div
+            className="flex flex-col gap-12 px-6 md:px-20"
+            style={{ paddingBottom: projects ? `${(projects.length - 1) * 40}px` : '0px' }}
+          >
+            {projects?.map((project: any, index: number) => {
+              return (
+                <div
+                  key={project._id}
+                  className="project-card-wrapper sticky origin-top w-full max-w-4xl mx-auto"
+                  style={{ top: '100px', zIndex: index + 1 }}
+                >
+                  <div className="project-card-inner group relative overflow-hidden rounded-[2rem] shadow-[0_-8px_30px_rgba(0,0,0,0.12)] border border-gray-100/50 dark:border-gray-700/50 aspect-[16/9] md:aspect-[16/9] bg-white dark:bg-zinc-800 origin-top">
+                    <div className="absolute inset-0 bg-black pointer-events-none z-30 tint-overlay" style={{ opacity: 0 }} />
                     <div className="absolute inset-0 bg-charcoal/40 group-hover:bg-charcoal/20 transition-[background-color,opacity] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] z-10" />
                     <div
                       className="w-full h-full bg-center bg-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06]"
                       style={{ backgroundImage: `url("${urlFor(project.image).url()}")` }}
                     />
-                    <div className="absolute bottom-0 left-0 p-10 z-20">
-                      <span className="bg-primary text-charcoal px-4 py-1 rounded-full text-xs font-bold mb-4 inline-block">
+
+                    <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-charcoal/60 to-transparent z-10 pointer-events-none" />
+
+                    <div className="absolute bottom-0 left-0 p-8 md:p-12 z-20 w-full bg-gradient-to-t from-charcoal/90 to-transparent">
+                      <span className="bg-primary text-charcoal px-5 py-1.5 rounded-full text-xs font-bold tracking-wide mb-4 inline-block shadow-lg">
                         {project.category}
                       </span>
-                      <h3 className="text-white text-3xl font-black">
+                      <h3 className="text-white text-3xl md:text-5xl font-black tracking-tight mb-3">
                         {project.title}
                       </h3>
-                      <p className="text-white/80 mt-2">
+                      <p className="text-white/80 md:text-lg max-w-2xl leading-relaxed">
                         {project.description}
                       </p>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
+              );
+            })}
+          </div>
         </div>
 
 
 
         
 
-        <section className="px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
+        <section className="relative z-10 px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4">Industrial Hardware Store</h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use.</p>
@@ -889,10 +919,10 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               large-scale engineering operations across India.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[240px] gap-4 md:gap-6">
-            {galleryItems.map((item: { id: string, mediaType: string, src: string, gridClass: string }) => 
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-[150px] md:auto-rows-[200px] gap-3 md:gap-4">
+            {galleryItems.map((item: any) =>
               item.mediaType === 'video' ? (
-                <div key={item.id} className={`group relative overflow-hidden shadow-sm hover:shadow-xl transition-all ${item.gridClass}`}>
+                <div key={item.id} className={`group relative overflow-hidden rounded-lg transition-all duration-500 hover:scale-105 ${item.gridClass}`}>
                   <video
                     src={item.src}
                     className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06] block"
@@ -1259,7 +1289,7 @@ function ProductSlide({
 
 function GalleryImage({ src, className = "" }: { src: string; className?: string }) {
   return (
-    <div className={`group relative overflow-hidden shadow-sm hover:shadow-xl transition-all ${className}`}>
+    <div className={`group relative overflow-hidden rounded-lg transition-all duration-500 hover:scale-105 ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
