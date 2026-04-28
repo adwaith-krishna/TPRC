@@ -560,7 +560,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-xl leading-relaxed">
               Premium enterprise-level scaffolding solutions for refineries,
               chemical plants, and power sectors. Built on precision, safety,
-              and 15+ years of excellence.
+              and 8+ years of excellence.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
@@ -591,7 +591,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   </div>
                   <div>
                     <p className="text-2xl font-black text-charcoal dark:text-white">
-                      15+
+                      8+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                       Years Exp
@@ -660,7 +660,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </p>
               <div className="grid grid-cols-2 gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">15+</h4>
+                  <h4 className="text-3xl font-black text-primary">8+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Years of Experience
                   </p>
@@ -690,7 +690,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <section className="xl:hidden px-6 md:px-20 pb-20 lg:pb-32 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">15+</p>
+            <p className="text-4xl font-black text-primary mb-2">8+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Years of Experience
             </p>
@@ -1222,24 +1222,54 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">
                 Contact Us
               </h4>
-              <ul className="flex flex-col gap-4 text-sm">
-                <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary">
+              <ul className="flex flex-col gap-6 text-sm">
+                <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
                     location_on
                   </span>
-                  102, Industrial Plaza, GIDC Area, Gujarat
+                  <div className="flex flex-col gap-1">
+                    <span>16/313A, TPR Business Plaza building</span>
+                    <span>Near BPCL-KR, Ambalamugal P.O.,</span>
+                    <span>Ernakulam 682302</span>
+                  </div>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary">
+                <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
                     mail
                   </span>
-                  info@tprajuengineering.com
+                  <a href="mailto:tprconstructions2020@gmail.com" className="hover:text-white transition-colors break-all">
+                    tprconstructions2020@gmail.com
+                  </a>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary">
+                <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
                     phone
                   </span>
-                  +91 98765 43210
+                  <div className="flex flex-col gap-1">
+                    <a href="tel:+919447590954" className="hover:text-white transition-colors">+91 9447590954</a>
+                    <a href="tel:+919744170465" className="hover:text-white transition-colors">+91 9744170465</a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-primary shrink-0 mt-0.5 w-6 h-6"
+                  >
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>
+                  <a href="https://www.instagram.com/tprconstructions/?hl=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                    tprconstructions
+                  </a>
                 </li>
               </ul>
             </div>
