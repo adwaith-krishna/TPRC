@@ -8,6 +8,7 @@ import {
 } from "react";
 import { CertificateModal } from "./CertificateModal";
 import { ShareFloating } from "./ShareFloating";
+import { AwardsSection } from "./AwardsSection";
 
 import { urlFor } from "@/lib/sanity.image";
 import { sendContactEmail } from "@/app/actions/contact";
@@ -536,7 +537,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </nav>
           <button
             type="button"
-            className="bg-primary hover:bg-yellow-500 text-charcoal px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap shadow-sm transition-all"
+            className="bg-primary hover:opacity-90 text-charcoal px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap shadow-sm transition-all"
           >
             Contact Us
           </button>
@@ -553,7 +554,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </span>
               ISO 9001:2015 Certified
             </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-[1.1] tracking-tighter text-charcoal dark:text-white">
+            <h1 className="text-5xl md:text-7xl font-serif leading-[1.1] tracking-tighter text-charcoal dark:text-white">
               Leaders in Scaffolding &amp; Industrial{" "}
               <span className="text-primary italic">Engineering</span> Services
             </h1>
@@ -565,7 +566,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <div className="flex flex-wrap gap-4">
               <button
                 type="button"
-                className="bg-primary hover:bg-yellow-500 text-charcoal px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
+                className="bg-primary hover:opacity-90 text-charcoal px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
               >
                 Contact Us{" "}
                 <span className="material-symbols-outlined">arrow_forward</span>
@@ -590,7 +591,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <span className="material-symbols-outlined">engineering</span>
                   </div>
                   <div>
-                    <p className="text-2xl font-black text-charcoal dark:text-white">
+                    <p className="text-2xl font-bold text-charcoal dark:text-white">
                       15+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
@@ -605,7 +606,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <span className="material-symbols-outlined">checklist</span>
                   </div>
                   <div>
-                    <p className="text-2xl font-black text-charcoal dark:text-white">
+                    <p className="text-2xl font-bold text-charcoal dark:text-white">
                       500+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
@@ -620,7 +621,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <span className="material-symbols-outlined">groups</span>
                   </div>
                   <div>
-                    <p className="text-2xl font-black text-charcoal dark:text-white">
+                    <p className="text-2xl font-bold text-charcoal dark:text-white">
                       200+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
@@ -643,7 +644,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               <span className="text-primary font-bold uppercase tracking-widest text-xs">
                 About TP Raju Engineering Contractor
               </span>
-              <h2 className="text-4xl md:text-5xl font-black leading-tight">
+              <h2 className="text-4xl md:text-5xl font-serif leading-tight">
                 Building Industrial Safety &amp; Engineering Excellence
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -660,25 +661,25 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </p>
               <div className="grid grid-cols-2 gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">15+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">15+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Years of Experience
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">500+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">500+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Projects Completed
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">200+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">200+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Satisfied Clients
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">ISO</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">ISO</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     9001:2015 Certified
                   </p>
@@ -690,19 +691,19 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <section className="xl:hidden px-6 md:px-20 pb-20 lg:pb-32 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">15+</p>
+            <p className="text-4xl font-bold text-primary mb-2">15+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Years of Experience
             </p>
           </div>
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">500+</p>
+            <p className="text-4xl font-bold text-primary mb-2">500+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Projects Completed
             </p>
           </div>
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">200+</p>
+            <p className="text-4xl font-bold text-primary mb-2">200+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Satisfied Clients
             </p>
@@ -714,7 +715,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <span className="text-primary font-bold uppercase tracking-widest text-xs">
               Trusted By Industry Leaders
             </span>
-            <h2 className="text-4xl font-black mt-2 mb-4">Our Major Clients</h2>
+            <h2 className="text-4xl font-serif mt-2 mb-4">Our Major Clients</h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
               We are proud to collaborate with some of India&apos;s most
               respected infrastructure, energy, and industrial organizations.
@@ -770,7 +771,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <div id="projects-stack-container" className="relative pt-20 pb-10 bg-white dark:bg-zinc-900/50 no-reveal">
           <div className="px-6 md:px-20 mb-16 shrink-0 text-center">
-            <h2 className="text-4xl font-black tracking-tight mb-2">
+            <h2 className="text-4xl font-serif tracking-tight mb-2">
               Featured Projects
             </h2>
             <p className="text-gray-500 uppercase tracking-widest text-xs font-bold">
@@ -802,7 +803,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                       <span className="bg-primary text-charcoal px-5 py-1.5 rounded-full text-xs font-bold tracking-wide mb-4 inline-block shadow-lg">
                         {project.category}
                       </span>
-                      <h3 className="text-white text-3xl md:text-5xl font-black tracking-tight mb-3">
+                      <h3 className="text-white text-3xl md:text-5xl font-serif tracking-tight mb-3">
                         {project.title}
                       </h3>
                       <p className="text-white/80 md:text-lg max-w-2xl leading-relaxed">
@@ -822,7 +823,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <section className="relative z-10 px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">Industrial Hardware Store</h2>
+            <h2 className="text-4xl font-serif mb-4">Industrial Hardware Store</h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use.</p>
           </div>
 
@@ -840,7 +841,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                       : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
                       }`}
                   >
-                    <span className={`text-3xl lg:text-4xl font-black transition-colors ${isActive ? 'text-primary' : 'text-gray-300 dark:text-gray-700'}`}>
+                    <span className={`text-3xl lg:text-4xl font-bold transition-colors ${isActive ? 'text-primary' : 'text-gray-300 dark:text-gray-700'}`}>
                       {category.number}
                     </span>
                     <span className={`text-lg md:text-xl font-bold text-left transition-colors ${isActive ? 'text-charcoal dark:text-white' : ''}`}>
@@ -916,7 +917,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <span className="text-primary font-bold uppercase tracking-widest text-xs">
               Project Gallery
             </span>
-            <h2 className="text-4xl font-black mt-2 mb-4">Inside Our Worksites</h2>
+            <h2 className="text-4xl font-serif mt-2 mb-4">Inside Our Worksites</h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto pb-4">
               A glimpse of our scaffolding systems, industrial maintenance, and
               large-scale engineering operations across India.
@@ -943,12 +944,13 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
         </section>
 
+        {/* 
         <section className="px-6 md:px-20 py-10 lg:py-28 bg-background-light dark:bg-background-dark">
           <div className="text-center mb-16">
             <span className="text-primary font-bold uppercase tracking-widest text-xs">
               Our Achievements
             </span>
-            <h2 className="text-4xl font-black mt-2 mb-4">
+            <h2 className="text-4xl font-serif mt-2 mb-4">
               Certifications &amp; Industry Recognition
             </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:py-2">
@@ -984,11 +986,14 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             />
           </div>
         </section>
+        */}
+
+        <AwardsSection onOpenCertificate={openCertificate} />
 
         {/* <!-- Testimonials --> */}
         <section className="px-6 md:px-20 py-20 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-black mb-3">Client Feedback</h2>
+            <h2 className="text-4xl font-serif mb-3">Client Feedback</h2>
             {/* <!--  <div className="flex justify-center gap-1 text-primary">
               <span className="material-symbols-outlined">star</span>
               <span className="material-symbols-outlined">star</span>
@@ -1002,36 +1007,36 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">&quot; </span>
+                <span className="text-primary font-serif text-lg">&quot; </span>
                 Their commitment to safety is unparalleled. In our refinery expansion, TP Raju Engineering completed 20,000 man-hours without a single incident.
-                <span className="text-primary font-black text-lg">&quot;</span>
+                <span className="text-primary font-serif text-lg">&quot;</span>
               </p>
               <div>
-                <p className="font-black">Ramesh Kumar</p>
+                <p className="font-serif">Ramesh Kumar</p>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Safety Head, HPCL</p>
               </div>
             </div>
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">&quot; </span>
+                <span className="text-primary font-serif text-lg">&quot; </span>
                 Excellent material quality and prompt delivery. Their fabrication work for our chemical reactor housing was precise and handled with great care.
-                <span className="text-primary font-black text-lg">&quot;</span>
+                <span className="text-primary font-serif text-lg">&quot;</span>
               </p>
               <div>
-                <p className="font-black">S. Venkatesh</p>
+                <p className="font-serif">S. Venkatesh</p>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Project Manager, L&amp;T</p>
               </div>
             </div>
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">&quot; </span>
+                <span className="text-primary font-serif text-lg">&quot; </span>
                 The rental service is highly efficient. They provided us with specialized cantilever scaffolding that solved a major accessibility challenge.
-                <span className="text-primary font-black text-lg">&quot;</span>
+                <span className="text-primary font-serif text-lg">&quot;</span>
               </p>
               <div>
-                <p className="font-black">David Miller</p>
+                <p className="font-serif">David Miller</p>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Site Engineer, Petrofac</p>
               </div>
             </div>
@@ -1043,7 +1048,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         <section className=" mx-6 md:mx-5 my-12 lg:my-15 px-6 md:px-20 py-24 lg:py-32 bg-black text-white overflow-hidden relative rounded-2xl">
           <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-20 items-start">
             <div className="relative">
-              <h2 className="contact-title text-[72px] md:text-[110px] leading-[0.9] font-black tracking-tight">
+              <h2 className="contact-title text-[72px] md:text-[110px] leading-[0.9] font-serif tracking-tight">
                 LET&apos;S <br />
                 GET IN <br />
                 TOUCH
