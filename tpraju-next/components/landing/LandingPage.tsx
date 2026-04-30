@@ -597,7 +597,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-charcoal dark:text-white">
-                      15+
+                      8+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                       Years Exp
@@ -666,7 +666,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </p>
               <div className="grid grid-cols-2 gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">15+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">8+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Years of Experience
                   </p>
@@ -696,7 +696,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <section className="xl:hidden px-6 md:px-20 pb-20 lg:pb-32 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-bold text-primary mb-2">15+</p>
+            <p className="text-4xl font-bold text-primary mb-2">8+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Years of Experience
             </p>
