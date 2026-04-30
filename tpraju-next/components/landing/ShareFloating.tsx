@@ -5,7 +5,23 @@ import { useEffect, useRef, useState } from "react";
 export function ShareFloating({ siteUrl }: { siteUrl?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [href, setHref] = useState(siteUrl ?? "https://yourwebsite.com");
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const footer = document.getElementById("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!siteUrl) setHref(window.location.href);
@@ -25,7 +41,10 @@ export function ShareFloating({ siteUrl }: { siteUrl?: string }) {
   const url = siteUrl ?? href;
 
   return (
-    <div className="share-wrapper" ref={wrapperRef}>
+    <div 
+      className={`share-wrapper transition-all duration-500 ${isFooterVisible ? 'opacity-0 pointer-events-none translate-y-10' : 'opacity-100'}`} 
+      ref={wrapperRef}
+    >
       <div
         className={`share-options${menuOpen ? " active" : ""}`}
         id="shareMenu"
@@ -75,7 +94,7 @@ export function ShareFloating({ siteUrl }: { siteUrl?: string }) {
         id="shareBtn"
         onClick={() => setMenuOpen((o) => !o)}
       >
-        <span className="material-symbols-outlined text-5xl">share</span>
+        <span className="material-symbols-outlined text-5xl">chat</span>
       </div>
     </div>
   );
