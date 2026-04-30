@@ -566,7 +566,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <p className="text-lg md:text-xl premium-body max-w-xl">
               Premium enterprise-level scaffolding solutions for refineries,
               chemical plants, and power sectors. Built on precision, safety,
-              and 15+ years of excellence.
+              and 8+ years of excellence.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
@@ -735,7 +735,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               {clients?.map((client: Client) => (
                 <div
                   key={`first-${client._id}`}
-                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
+                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-40 mr-4"
                 >
                   <img
                     src={urlFor(client.logo)
@@ -754,7 +754,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               {clients?.map((client: Client) => (
                 <div
                   key={`second-${client._id}`}
-                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-38 mr-4"
+                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-40 mr-4"
                 >
                   <img
                     src={urlFor(client.logo)
@@ -1246,24 +1246,54 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">
                 Contact Us
               </h4>
-              <ul className="flex flex-col gap-4 text-sm">
-                <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary">
+              <ul className="flex flex-col gap-6 text-sm">
+                <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
                     location_on
                   </span>
-                  102, Industrial Plaza, GIDC Area, Gujarat
+                  <div className="flex flex-col gap-1">
+                    <span>16/313A, TPR Business Plaza building</span>
+                    <span>Near BPCL-KR, Ambalamugal P.O.,</span>
+                    <span>Ernakulam 682302</span>
+                  </div>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary">
+                <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
                     mail
                   </span>
-                  info@tprajuengineering.com
+                  <a href="mailto:tprconstructions2020@gmail.com" className="hover:text-white transition-colors break-all">
+                    tprconstructions2020@gmail.com
+                  </a>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary">
+                <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
                     phone
                   </span>
-                  +91 98765 43210
+                  <div className="flex flex-col gap-1">
+                    <a href="tel:+919447590954" className="hover:text-white transition-colors">+91 9447590954</a>
+                    <a href="tel:+919744170465" className="hover:text-white transition-colors">+91 9744170465</a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-primary shrink-0 mt-0.5 w-6 h-6"
+                  >
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>
+                  <a href="https://www.instagram.com/tprconstructions/?hl=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                    tprconstructions
+                  </a>
                 </li>
               </ul>
             </div>
