@@ -8,9 +8,12 @@ import {
 } from "react";
 import { CertificateModal } from "./CertificateModal";
 import { ShareFloating } from "./ShareFloating";
+import { AwardsSection } from "./AwardsSection";
 
 import { urlFor } from "@/lib/sanity.image";
 import { sendContactEmail } from "@/app/actions/contact";
+import Lenis from "lenis";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 import { TPRCLoader } from "./LoadingScreen";
 import { Project, Product, GalleryItem, Client } from "@/types/sanity";
@@ -249,35 +252,38 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
   // Transform Sanity gallery items
   const galleryItems = transformGalleryItems(gallery);
 
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   const [activeTab, setActiveTab] = useState(categories[0]?.id || "");
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const pausedSlidersRef = useRef(new Set<string>());
   const sliderStateRef = useRef<Record<string, number>>({ cat1: 0, cat2: 0 });
-  const productScrollRef = useRef<HTMLDivElement>(null);
 
-  const scrollProductsLeft = () => {
-    if (productScrollRef.current) {
-      const cardWidth = (productScrollRef.current.children[0] as HTMLElement)?.offsetWidth || 300;
-      const gap = 24;
-      productScrollRef.current.scrollBy({ left: -(cardWidth + gap), behavior: "smooth" });
-    }
-  };
 
-  const scrollProductsRight = () => {
-    if (productScrollRef.current) {
-      const cardWidth = (productScrollRef.current.children[0] as HTMLElement)?.offsetWidth || 300;
-      const gap = 24;
-      productScrollRef.current.scrollBy({ left: cardWidth + gap, behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    if (productScrollRef.current) {
-      productScrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-    }
-  }, [activeTab]);
 
   const openCertificate = useCallback((src: string) => setCertSrc(src), []);
   const closeCertificate = useCallback(() => setCertSrc(null), []);
@@ -491,10 +497,10 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 />
               </svg>
             </div>
-            <h1 className="text-xl font-extrabold tracking-tight text-charcoal dark:text-white">
+            <div className="text-xl font-extrabold tracking-tight text-charcoal dark:text-white">
               TP RAJU{" "}
               <span className="font-normal text-gray-500">Engineering</span>
-            </h1>
+            </div>
           </div>
           <nav className="hidden lg:flex items-center gap-10">
             <a
@@ -536,7 +542,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </nav>
           <button
             type="button"
-            className="bg-primary hover:bg-yellow-500 text-charcoal px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap shadow-sm transition-all"
+            className="bg-primary hover:opacity-90 text-charcoal px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap shadow-sm transition-all"
           >
             Contact Us
           </button>
@@ -544,20 +550,20 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
       </header>
 
       <main className="max-w-[1440px] mx-auto">
-        <section className="px-6 md:px-20 pt-10 lg:pt-12 pb-12 lg:pb-12 grid lg:grid-cols-2 gap-16 items-center">
+        <section className="px-6 md:px-16 lg:px-24 pt-10 lg:pt-16 pb-16 lg:pb-24 grid lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col gap-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-primary text-xs font-bold tracking-wider uppercase">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-primary premium-label">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
               </span>
               ISO 9001:2015 Certified
             </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-[1.1] tracking-tighter text-charcoal dark:text-white">
+            <h1 className="text-5xl md:text-7xl premium-heading text-charcoal dark:text-white">
               Leaders in Scaffolding &amp; Industrial{" "}
               <span className="text-primary italic">Engineering</span> Services
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-xl leading-relaxed">
+            <p className="text-lg md:text-xl premium-body max-w-xl">
               Premium enterprise-level scaffolding solutions for refineries,
               chemical plants, and power sectors. Built on precision, safety,
               and 8+ years of excellence.
@@ -565,7 +571,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <div className="flex flex-wrap gap-4">
               <button
                 type="button"
-                className="bg-primary hover:bg-yellow-500 text-charcoal px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
+                className="bg-primary hover:opacity-90 text-charcoal px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
               >
                 Contact Us{" "}
                 <span className="material-symbols-outlined">arrow_forward</span>
@@ -590,7 +596,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <span className="material-symbols-outlined">engineering</span>
                   </div>
                   <div>
-                    <p className="text-2xl font-black text-charcoal dark:text-white">
+                    <p className="text-2xl font-bold text-charcoal dark:text-white">
                       8+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
@@ -605,7 +611,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <span className="material-symbols-outlined">checklist</span>
                   </div>
                   <div>
-                    <p className="text-2xl font-black text-charcoal dark:text-white">
+                    <p className="text-2xl font-bold text-charcoal dark:text-white">
                       500+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
@@ -620,7 +626,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <span className="material-symbols-outlined">groups</span>
                   </div>
                   <div>
-                    <p className="text-2xl font-black text-charcoal dark:text-white">
+                    <p className="text-2xl font-bold text-charcoal dark:text-white">
                       200+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
@@ -633,26 +639,26 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
         </section>
 
-        <section className="px-6 md:px-20 py-20 lg:py-32">
+        <section id="about" className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl relative overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div
               className="w-full aspect-[4/5] bg-center bg-cover rounded-2xl shadow-2xl"
               style={{ backgroundImage: `url("${ABOUT_IMG}")` }}
             />
             <div className="flex flex-col gap-6">
-              <span className="text-primary font-bold uppercase tracking-widest text-xs">
+              <span className="text-primary premium-label">
                 About TP Raju Engineering Contractor
               </span>
-              <h2 className="text-4xl md:text-5xl font-black leading-tight">
+              <h2 className="text-4xl md:text-5xl premium-heading">
                 Building Industrial Safety &amp; Engineering Excellence
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-lg premium-body">
                 TP Raju Engineering Contractor is a trusted name in scaffolding
                 rental and industrial engineering services, delivering safe and
                 reliable solutions for refineries, chemical plants, power plants
                 and heavy industries across India.
               </p>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="premium-body">
                 Since our establishment, we have focused on quality
                 workmanship, modern equipment, and strict safety compliance. Our
                 experienced workforce and engineering team ensure every project
@@ -660,25 +666,25 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </p>
               <div className="grid grid-cols-2 gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">8+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">8+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Years of Experience
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">500+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">500+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Projects Completed
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">200+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">200+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Satisfied Clients
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">ISO</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">ISO</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     9001:2015 Certified
                   </p>
@@ -690,40 +696,41 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <section className="xl:hidden px-6 md:px-20 pb-20 lg:pb-32 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">8+</p>
+            <p className="text-4xl font-bold text-primary mb-2">8+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Years of Experience
             </p>
           </div>
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">500+</p>
+            <p className="text-4xl font-bold text-primary mb-2">500+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Projects Completed
             </p>
           </div>
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">200+</p>
+            <p className="text-4xl font-bold text-primary mb-2">200+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Satisfied Clients
             </p>
           </div>
         </section>
 
-        <section className="px-6 md:px-20 py-20 bg-white dark:bg-zinc-900/50 rounded-2xl">
+        <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-16">
-            <span className="text-primary font-bold uppercase tracking-widest text-xs">
+            <span className="text-primary premium-label">
               Trusted By Industry Leaders
             </span>
-            <h2 className="text-4xl font-black mt-2 mb-4">Our Major Clients</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+            <h2 className="text-4xl md:text-5xl premium-heading mt-2 mb-4">Our Major Clients</h2>
+            <p className="premium-body max-w-xl mx-auto">
               We are proud to collaborate with some of India&apos;s most
               respected infrastructure, energy, and industrial organizations.
             </p>
           </div>
-          <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white dark:from-zinc-900/50 to-transparent z-10"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-zinc-900/50 to-transparent z-10"></div>
-            <div className="flex w-max animate-scroll">
+          <div className="relative overflow-hidden premium-scroll-mask">
+            <div
+              className="flex animate-scroll"
+              style={{ animationDuration: `${(clients?.length || 5) * 3}s` }}
+            >
               {/* First set of clients */}
               {clients?.map((client: Client) => (
                 <div
@@ -768,17 +775,17 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
         </section>
 
-        <div id="projects-stack-container" className="relative pt-20 pb-10 bg-white dark:bg-zinc-900/50 no-reveal">
-          <div className="px-6 md:px-20 mb-16 shrink-0 text-center">
-            <h2 className="text-4xl font-black tracking-tight mb-2">
+        <div id="projects-stack-container" className="relative pt-24 pb-0 bg-white dark:bg-zinc-900/50 no-reveal">
+          <div className="px-6 md:px-16 lg:px-24 mb-16 shrink-0 text-center">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-2">
               Featured Projects
             </h2>
-            <p className="text-gray-500 uppercase tracking-widest text-xs font-bold">
+            <p className="text-gray-500 font-sans uppercase tracking-widest text-sm font-bold">
               Industry standard excellence
             </p>
           </div>
           <div
-            className="flex flex-col gap-12 px-6 md:px-20"
+            className="flex flex-col gap-12 px-6 md:px-16 lg:px-24"
             style={{ paddingBottom: projects ? `${(projects.length - 1) * 40}px` : '0px' }}
           >
             {projects?.map((project: Project, index: number) => {
@@ -802,7 +809,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                       <span className="bg-primary text-charcoal px-5 py-1.5 rounded-full text-xs font-bold tracking-wide mb-4 inline-block shadow-lg">
                         {project.category}
                       </span>
-                      <h3 className="text-white text-3xl md:text-5xl font-black tracking-tight mb-3">
+                      <h3 className="text-white text-3xl md:text-5xl font-serif tracking-tight mb-3">
                         {project.title}
                       </h3>
                       <p className="text-white/80 md:text-lg max-w-2xl leading-relaxed">
@@ -820,110 +827,123 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
 
 
-        <section className="relative z-10 px-6 md:px-20 py-20 lg:py-32 bg-background-light dark:bg-background-dark">
+        <section className="relative z-10 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-[#fafafa]">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">Industrial Hardware Store</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use.</p>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Industrial Hardware Store</h2>
+            <p className="premium-body max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use.</p>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-            {/* <!-- Left Column: Tabs --> */}
-            <div className="lg:w-1/3 flex flex-col justify-top gap-4 ">
+          <div className="flex flex-col items-center gap-16">
+            {/* <!-- Centered Pill Tabs (Top) --> */}
+            <div className="inline-flex bg-charcoal dark:bg-black p-1 rounded-full shadow-lg border border-white/5">
               {categories.map((category) => {
                 const isActive = activeTab === category.id;
                 return (
                   <button
                     key={category.id}
                     onClick={() => setActiveTab(category.id)}
-                    className={`flex items-center justify-center lg:justify-start gap-4 p-4 lg:py-4 lg:px-0 transition-all duration-300 ${isActive
-                      ? ''
-                      : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                    className={`group relative flex items-center gap-1.5 px-7 py-2.5 rounded-full transition-all duration-500 font-sans font-medium text-base ${isActive
+                      ? 'bg-white text-charcoal shadow-sm'
+                      : 'text-white/50 hover:text-white/80'
                       }`}
                   >
-                    <span className={`text-3xl lg:text-4xl font-black transition-colors ${isActive ? 'text-primary' : 'text-gray-300 dark:text-gray-700'}`}>
+                    <span>{category.name}</span>
+                    <span className={`text-[10px] font-bold self-start mt-0.5 ${isActive ? 'text-charcoal/40' : 'text-white/20'}`}>
                       {category.number}
-                    </span>
-                    <span className={`text-lg md:text-xl font-bold text-left transition-colors ${isActive ? 'text-charcoal dark:text-white' : ''}`}>
-                      {category.name}
                     </span>
                   </button>
                 );
               })}
             </div>
 
-            {/* <!-- Right Column: Product Cards Carousel --> */}
-            <div className="lg:w-2/3 flex flex-col">
-              <div
-                ref={productScrollRef}
-                className="flex gap-4 lg:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6"
-              >
-                {categories.find(c => c.id === activeTab)?.products.map((product: {
-                  id: string;
-                  name: string;
-                  subtitle?: string;
-                  tag?: string;
-                  image: string;
-                }) => (
-                  <div
-                    key={product.id}
-                    className="w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start bg-white dark:bg-gray-800 p-4 lg:p-5 rounded-2xl shadow-sm hover:shadow-xl transition-all group animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col"
-                  >
-                    <div className="bg-gray-50 dark:bg-gray-900 rounded-lg aspect-[4/3] flex items-center justify-center mb-4 overflow-hidden">
-                      <img
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        alt={product.name}
-                        src={product.image}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-base lg:text-lg mb-1 leading-tight truncate">{product.name}</h3>
-                      <p className="text-xs lg:text-sm text-gray-500 mb-4 truncate">{product.subtitle}</p>
-                    </div>
-                    <div className="flex justify-between items-center border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
-                      <span className="text-primary font-bold text-xs lg:text-sm tracking-wide">{product.tag}</span>
-                      {/* <button className="size-8 lg:size-10 rounded-full bg-background-light dark:bg-background-dark group-hover:bg-primary group-hover:text-charcoal flex items-center justify-center transition-colors shrink-0">
-                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                      </button> */}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {/* <!-- Product Cards Carousel (Below) - Conditional Auto Scroll --> */}
+            <div className="w-full relative overflow-hidden premium-scroll-mask flex items-center min-h-[400px]">
+              {(() => {
+                const activeCategory = categories.find(c => c.id === activeTab);
+                const products = activeCategory?.products || [];
+                const shouldScroll = products.length > 4;
 
-              {/* <!-- Scroll Controls --> */}
-              <div className="flex justify-end gap-3 mt-4">
-                <button
-                  onClick={scrollProductsLeft}
-                  className="size-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-primary hover:text-charcoal hover:border-primary transition-all text-gray-500 hover:text-charcoal dark:text-gray-400"
-                  aria-label="Scroll left"
-                >
-                  <span className="material-symbols-outlined">arrow_back</span>
-                </button>
-                <button
-                  onClick={scrollProductsRight}
-                  className="size-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-primary hover:text-charcoal hover:border-primary transition-all text-gray-500 hover:text-charcoal dark:text-gray-400"
-                  aria-label="Scroll right"
-                >
-                  <span className="material-symbols-outlined">arrow_forward</span>
-                </button>
-              </div>
+                if (!shouldScroll) {
+                  return (
+                    <div className="flex flex-wrap justify-center gap-8 w-full py-4">
+                      {products.map((product: any) => (
+                        <div
+                          key={product.id}
+                          className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col transition-all duration-300 hover:scale-[1.03] hover:shadow-xl relative"
+                        >
+                          <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
+                            <img
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              alt={product.name}
+                              src={product.image}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
+                            <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
+                          </div>
+                          <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
+                            <span className="text-primary font-bold text-[10px] tracking-wider uppercase">{product.tag}</span>
+                            <span className="material-symbols-outlined text-gray-300 text-sm">inventory_2</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                }
+
+                return (
+                  <div
+                    className="flex animate-scroll-reverse hover:pause gap-8 w-max"
+                    style={{ animationDuration: `${products.length * 6}s` }}
+                  >
+                    {[1, 2].map((loop) => (
+                      <div key={loop} className="flex gap-8">
+                        {products.map((product: any) => (
+                          <div
+                            key={`${loop}-${product.id}`}
+                            className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col shrink-0 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:z-20 relative"
+                          >
+                            <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
+                              <img
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt={product.name}
+                                src={product.image}
+                              />
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
+                              <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
+                            </div>
+                            <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
+                              <span className="text-primary font-bold text-[10px] tracking-wider uppercase">{product.tag}</span>
+                              <span className="material-symbols-outlined text-gray-300 text-sm">inventory_2</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </section>
         {/* ----------------------------------------------------------product end-------------------------------- */}
 
-        <section className="px-6 md:px-20 py-20 lg:py-28 bg-white dark:bg-zinc-900/50 rounded-2xl">
+        <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-16">
-            <span className="text-primary font-bold uppercase tracking-widest text-xs">
+            <span className="text-primary font-sans uppercase tracking-widest text-sm font-bold">
               Project Gallery
             </span>
-            <h2 className="text-4xl font-black mt-2 mb-4">Inside Our Worksites</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto pb-4">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mt-2 mb-4">Inside Our Worksites</h2>
+            <p className="premium-body max-w-xl mx-auto pb-4">
               A glimpse of our scaffolding systems, industrial maintenance, and
               large-scale engineering operations across India.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-[150px] md:auto-rows-[200px] gap-3 md:gap-4">
-            {galleryItems.map((item: TransformedGalleryItem) =>
+            {galleryItems.slice(0, 10).map((item: TransformedGalleryItem) =>
               item.mediaType === 'video' ? (
                 <div key={item.id} className={`group relative overflow-hidden rounded-lg transition-all duration-500 hover:scale-105 ${item.gridClass}`}>
                   <video
@@ -943,12 +963,13 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
         </section>
 
+        {/* 
         <section className="px-6 md:px-20 py-10 lg:py-28 bg-background-light dark:bg-background-dark">
           <div className="text-center mb-16">
             <span className="text-primary font-bold uppercase tracking-widest text-xs">
               Our Achievements
             </span>
-            <h2 className="text-4xl font-black mt-2 mb-4">
+            <h2 className="text-4xl font-serif mt-2 mb-4">
               Certifications &amp; Industry Recognition
             </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:py-2">
@@ -984,11 +1005,14 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             />
           </div>
         </section>
+        */}
+
+        <AwardsSection onOpenCertificate={openCertificate} />
 
         {/* <!-- Testimonials --> */}
-        <section className="px-6 md:px-20 py-20 bg-white dark:bg-zinc-900/50 rounded-2xl">
+        <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-black mb-3">Client Feedback</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-3">Client Feedback</h2>
             {/* <!--  <div className="flex justify-center gap-1 text-primary">
               <span className="material-symbols-outlined">star</span>
               <span className="material-symbols-outlined">star</span>
@@ -1001,37 +1025,37 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           <div className="grid md:grid-cols-3 gap-6">
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
-              <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">&quot; </span>
+              <p className="italic premium-body mb-6">
+                <span className="text-primary font-serif text-lg">&quot; </span>
                 Their commitment to safety is unparalleled. In our refinery expansion, TP Raju Engineering completed 20,000 man-hours without a single incident.
-                <span className="text-primary font-black text-lg">&quot;</span>
+                <span className="text-primary font-serif text-lg">&quot;</span>
               </p>
               <div>
-                <p className="font-black">Ramesh Kumar</p>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Safety Head, HPCL</p>
+                <p className="font-serif">Ramesh Kumar</p>
+                <p className="premium-label text-gray-400">Safety Head, HPCL</p>
               </div>
             </div>
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">&quot; </span>
+                <span className="text-primary font-serif text-lg">&quot; </span>
                 Excellent material quality and prompt delivery. Their fabrication work for our chemical reactor housing was precise and handled with great care.
-                <span className="text-primary font-black text-lg">&quot;</span>
+                <span className="text-primary font-serif text-lg">&quot;</span>
               </p>
               <div>
-                <p className="font-black">S. Venkatesh</p>
+                <p className="font-serif">S. Venkatesh</p>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Project Manager, L&amp;T</p>
               </div>
             </div>
 
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-black text-lg">&quot; </span>
+                <span className="text-primary font-serif text-lg">&quot; </span>
                 The rental service is highly efficient. They provided us with specialized cantilever scaffolding that solved a major accessibility challenge.
-                <span className="text-primary font-black text-lg">&quot;</span>
+                <span className="text-primary font-serif text-lg">&quot;</span>
               </p>
               <div>
-                <p className="font-black">David Miller</p>
+                <p className="font-serif">David Miller</p>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Site Engineer, Petrofac</p>
               </div>
             </div>
@@ -1040,10 +1064,10 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         </section>
 
 
-        <section className=" mx-6 md:mx-5 my-12 lg:my-15 px-6 md:px-20 py-24 lg:py-32 bg-black text-white overflow-hidden relative rounded-2xl">
+        <section className="mx-6 md:mx-16 lg:mx-24 my-24 lg:my-32 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-black text-white overflow-hidden relative rounded-2xl">
           <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-20 items-start">
             <div className="relative">
-              <h2 className="contact-title text-[72px] md:text-[110px] leading-[0.9] font-black tracking-tight">
+              <h2 className="contact-title text-[72px] md:text-[110px] leading-[0.9] font-serif font-bold tracking-tight">
                 LET&apos;S <br />
                 GET IN <br />
                 TOUCH
@@ -1126,7 +1150,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         </section>
       </main>
 
-      <footer className="bg-charcoal dark:bg-black text-gray-400 py-20 border-t border-white/5">
+      <footer id="footer" className="bg-charcoal dark:bg-black text-gray-400 py-20 border-t border-white/5">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
             <div className="flex flex-col gap-6">
@@ -1148,7 +1172,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   TP RAJU
                 </h2>
               </div>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm premium-body">
                 Providing high-end scaffolding and engineering services across
                 India since 2008. Precision, reliability, and safety are the
                 core of our operations.
