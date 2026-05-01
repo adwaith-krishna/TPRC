@@ -176,15 +176,15 @@ const transformProductsToCategories = (products: Product[]) => {
 
 // Fallback gallery items for when no gallery data is available
 const FALLBACK_GALLERY_ITEMS = [
-  { id: 'g1', mediaType: 'image', src: "https://img.freepik.com/premium-photo/workers-ascending-metal-maze-realistic-depiction-scaffolding-climbing-candid-daily-wo_980716-109649.jpg?w=2000", gridClass: "col-span-2 row-span-2", title: "Scaffolding Installation" },
-  { id: 'g2', mediaType: 'image', src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80", gridClass: "col-span-2 row-span-1", title: "Project Overview" },
-  { id: 'g3', mediaType: 'video', src: "https://www.w3schools.com/html/mov_bbb.mp4", gridClass: "col-span-1 row-span-1", title: "Work in Progress" },
-  { id: 'g4', mediaType: 'image', src: "https://cdn.pixabay.com/photo/2023/09/14/09/07/scaffolding-8252585_960_720.jpg", gridClass: "col-span-1 row-span-1", title: "Safety Setup" },
-  { id: 'g5', mediaType: 'image', src: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=80", gridClass: "col-span-1 row-span-2 hidden md:block", title: "Structural Work" },
-  { id: 'g6', mediaType: 'video', src: "https://www.w3schools.com/html/movie.mp4", gridClass: "col-span-2 row-span-2", title: "On-Site Documentation" },
-  { id: 'g7', mediaType: 'image', src: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=900&q=80", gridClass: "col-span-1 row-span-1", title: "Construction Details" },
-  { id: 'g8', mediaType: 'image', src: "https://img.freepik.com/premium-photo/construction-workers-working-construction-site_891336-3566.jpg", gridClass: "col-span-1 row-span-1", title: "Team at Work" },
-  { id: 'g9', mediaType: 'image', src: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=80", gridClass: "col-span-2 row-span-1 md:hidden", title: "Project Completion" },
+  { id: 'g1', mediaType: 'image', src: "https://img.freepik.com/premium-photo/workers-ascending-metal-maze-realistic-depiction-scaffolding-climbing-candid-daily-wo_980716-109649.jpg?w=2000", gridClass: "col-span-2 md:col-span-2 row-span-2 md:row-span-2", title: "Scaffolding Installation" },
+  { id: 'g2', mediaType: 'image', src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80", gridClass: "col-span-2 md:col-span-2 row-span-1 md:row-span-1", title: "Project Overview" },
+  { id: 'g3', mediaType: 'video', src: "https://www.w3schools.com/html/mov_bbb.mp4", gridClass: "col-span-1 md:col-span-1 row-span-1 md:row-span-1", title: "Work in Progress" },
+  { id: 'g4', mediaType: 'image', src: "https://cdn.pixabay.com/photo/2023/09/14/09/07/scaffolding-8252585_960_720.jpg", gridClass: "col-span-1 md:col-span-1 row-span-1 md:row-span-1", title: "Safety Setup" },
+  { id: 'g5', mediaType: 'image', src: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=80", gridClass: "col-span-1 md:col-span-1 row-span-2 md:row-span-2 hidden md:block", title: "Structural Work" },
+  { id: 'g6', mediaType: 'video', src: "https://www.w3schools.com/html/movie.mp4", gridClass: "col-span-2 md:col-span-2 row-span-2 md:row-span-2", title: "On-Site Documentation" },
+  { id: 'g7', mediaType: 'image', src: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=900&q=80", gridClass: "col-span-1 md:col-span-1 row-span-1 md:row-span-1", title: "Construction Details" },
+  { id: 'g8', mediaType: 'image', src: "https://img.freepik.com/premium-photo/construction-workers-working-construction-site_891336-3566.jpg", gridClass: "col-span-1 md:col-span-1 row-span-1 md:row-span-1", title: "Team at Work" },
+  { id: 'g9', mediaType: 'image', src: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=900&q=80", gridClass: "col-span-2 md:col-span-2 row-span-1 md:row-span-1 md:hidden", title: "Project Completion" },
 ];
 
 // Helper function to transform Sanity gallery items
@@ -208,16 +208,16 @@ const transformGalleryItems = (galleryItems: GalleryItem[]): TransformedGalleryI
 
     // Assign grid positions - make larger items for visual interest but keep it simple and scalable
     const gridClasses = [
-      "col-span-1 row-span-2", // Tall item
-      "col-span-2 row-span-1", // Wide item (on larger screens)
-      "col-span-1 row-span-1", // Normal item
-      "col-span-1 row-span-1", // Normal item
-      "col-span-1 row-span-1", // Normal item
-      "col-span-2 row-span-2", // Large item (on larger screens)
-      "col-span-1 row-span-1", // Normal item
-      "col-span-1 row-span-1", // Normal item
-      "col-span-1 row-span-1", // Normal item
-      "col-span-1 row-span-1"  // Normal item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-2", // Tall item (on larger screens)
+      "col-span-2 md:col-span-2 row-span-1 md:row-span-1", // Wide item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-1", // Normal item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-1", // Normal item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-1", // Normal item
+      "col-span-2 md:col-span-2 row-span-2 md:row-span-2", // Large item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-1", // Normal item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-1", // Normal item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-1", // Normal item
+      "col-span-1 md:col-span-1 row-span-1 md:row-span-1"  // Normal item
     ];
 
     return {
@@ -447,12 +447,10 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           totalProgress += progresses[j];
         }
 
-        const laterVisibleCount = progresses.slice(i + 1).filter((value) => value > 0.05).length;
-        const hideOldCard = laterVisibleCount >= 4;
         const wrapperEl = wrapper as HTMLElement;
-        wrapperEl.style.visibility = hideOldCard ? "hidden" : "visible";
-        wrapperEl.style.pointerEvents = hideOldCard ? "none" : "auto";
-        wrapperEl.style.opacity = hideOldCard ? "0" : "1";
+        wrapperEl.style.visibility = "visible";
+        wrapperEl.style.pointerEvents = "auto";
+        wrapperEl.style.opacity = "1";
 
         const scale = Math.max(0.7, 1 - totalProgress * 0.05);
         inner.style.transform = `scale(${scale})`;
@@ -497,9 +495,9 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 />
               </svg>
             </div>
-            <div className="text-xl font-extrabold tracking-tight text-charcoal dark:text-white">
+            <div className="text-lg md:text-xl font-extrabold tracking-tight text-charcoal dark:text-white leading-none">
               TP RAJU{" "}
-              <span className="font-normal text-gray-500">Engineering</span>
+              <span className="hidden sm:inline font-normal text-gray-500">Engineering</span>
             </div>
           </div>
           <nav className="hidden lg:flex items-center gap-10">
@@ -542,7 +540,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </nav>
           <button
             type="button"
-            className="bg-primary hover:opacity-90 text-charcoal px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap shadow-sm transition-all"
+            className="bg-primary hover:opacity-90 text-charcoal px-4 md:px-5 py-2 rounded-full font-bold text-xs md:text-sm whitespace-nowrap shadow-sm transition-all"
           >
             Contact Us
           </button>
@@ -559,7 +557,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </span>
               ISO 9001:2015 Certified
             </div>
-            <h1 className="text-5xl md:text-7xl premium-heading text-charcoal dark:text-white">
+            <h1 className="text-4xl md:text-7xl premium-heading text-charcoal dark:text-white">
               Leaders in Scaffolding &amp; Industrial{" "}
               <span className="text-primary italic">Engineering</span> Services
             </h1>
@@ -639,17 +637,17 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
         </section>
 
-        <section id="about" className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl relative overflow-hidden">
+        <section id="about" className="px-6 md:px-16 lg:px-24 py-16 md:py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl relative overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div
-              className="w-full aspect-[4/5] bg-center bg-cover rounded-2xl shadow-2xl"
+              className="hidden lg:block w-full aspect-[4/5] bg-center bg-cover rounded-2xl shadow-2xl"
               style={{ backgroundImage: `url("${ABOUT_IMG}")` }}
             />
             <div className="flex flex-col gap-6">
               <span className="text-primary premium-label">
                 About TP Raju Engineering Contractor
               </span>
-              <h2 className="text-4xl md:text-5xl premium-heading">
+              <h2 className="text-3xl md:text-5xl premium-heading">
                 Building Industrial Safety &amp; Engineering Excellence
               </h2>
               <p className="text-lg premium-body">
@@ -664,7 +662,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 experienced workforce and engineering team ensure every project
                 is executed efficiently and on schedule.
               </p>
-              <div className="grid grid-cols-2 gap-6 mt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
                   <h4 className="text-4xl font-bold text-primary mb-2">8+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
@@ -694,26 +692,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
         </section>
 
-        <section className="xl:hidden px-6 md:px-20 pb-20 lg:pb-32 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-bold text-primary mb-2">8+</p>
-            <p className="text-sm font-bold text-gray-500 uppercase">
-              Years of Experience
-            </p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-bold text-primary mb-2">500+</p>
-            <p className="text-sm font-bold text-gray-500 uppercase">
-              Projects Completed
-            </p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-bold text-primary mb-2">200+</p>
-            <p className="text-sm font-bold text-gray-500 uppercase">
-              Satisfied Clients
-            </p>
-          </div>
-        </section>
+        {/* Stats section removed to prevent duplication as it's already in the About grid above */}
 
         <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-16">
@@ -728,56 +707,38 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
           <div className="relative overflow-hidden premium-scroll-mask">
             <div
-              className="flex animate-scroll"
-              style={{ animationDuration: `${(clients?.length || 5) * 3}s` }}
+              className="flex animate-scroll hover:pause gap-8 w-max py-4"
+              style={{ animationDuration: `${(clients?.length || 5) * 4}s` }}
             >
-              {/* First set of clients */}
-              {clients?.map((client: Client) => (
-                <div
-                  key={`first-${client._id}`}
-                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-40 mr-4"
-                >
-                  <img
-                    src={urlFor(client.logo)
-                      .height(48)
-                      .fit('max')
-                      .auto('format')
-                      .quality(80)
-                      .url()}
-                    alt={client.name}
-                    className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
-                  />
-                  <p className="font-bold text-sm text-center">{client.name}</p>
+              {[1, 2].map((loop) => (
+                <div key={loop} className="flex gap-8">
+                  {clients?.map((client: Client) => (
+                    <div
+                      key={`${loop}-${client._id}`}
+                      className="group p-4 md:p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-32 md:w-40"
+                    >
+                      <img
+                        src={urlFor(client.logo)
+                          .height(48)
+                          .fit('max')
+                          .auto('format')
+                          .quality(80)
+                          .url()}
+                        alt={client.name}
+                        className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
+                      />
+                      <p className="font-bold text-sm text-center">{client.name}</p>
+                    </div>
+                  ))}
                 </div>
               ))}
-              {/* Duplicate set for seamless loop */}
-              {clients?.map((client: Client) => (
-                <div
-                  key={`second-${client._id}`}
-                  className="group p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-40 mr-4"
-                >
-                  <img
-                    src={urlFor(client.logo)
-                      .height(48)
-                      .fit('max')
-                      .auto('format')
-                      .quality(80)
-                      .url()}
-                    alt={client.name}
-                    className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
-                  />
-                  <p className="font-bold text-sm text-center">{client.name}</p>
-                </div>
-              ))}
-
-
             </div>
           </div>
         </section>
 
         <div id="projects-stack-container" className="relative pt-24 pb-0 bg-white dark:bg-zinc-900/50 no-reveal">
           <div className="px-6 md:px-16 lg:px-24 mb-16 shrink-0 text-center">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-2">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight mb-2">
               Featured Projects
             </h2>
             <p className="text-gray-500 font-sans uppercase tracking-widest text-sm font-bold">
@@ -792,8 +753,8 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               return (
                 <div
                   key={project._id}
-                  className="project-card-wrapper sticky origin-top w-full max-w-4xl mx-auto"
-                  style={{ top: '100px', zIndex: index + 1 }}
+                  className="project-card-wrapper sticky origin-top w-full max-w-4xl mx-auto px-2 md:px-0"
+                  style={{ top: '80px', zIndex: index + 1 }}
                 >
                   <div className="project-card-inner group relative overflow-hidden rounded-[2rem] shadow-[0_-8px_30px_rgba(0,0,0,0.12)] border border-gray-100/50 dark:border-gray-700/50 aspect-[16/9] md:aspect-[16/9] bg-white dark:bg-zinc-800 origin-top">
                     <div className="absolute inset-0 bg-black pointer-events-none z-30 tint-overlay" style={{ opacity: 0 }} />
@@ -835,25 +796,27 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
           <div className="flex flex-col items-center gap-16">
             {/* <!-- Centered Pill Tabs (Top) --> */}
-            <div className="inline-flex bg-charcoal dark:bg-black p-1 rounded-full shadow-lg border border-white/5">
-              {categories.map((category) => {
-                const isActive = activeTab === category.id;
-                return (
-                  <button
-                    key={category.id}
-                    onClick={() => setActiveTab(category.id)}
-                    className={`group relative flex items-center gap-1.5 px-7 py-2.5 rounded-full transition-all duration-500 font-sans font-medium text-base ${isActive
-                      ? 'bg-white text-charcoal shadow-sm'
-                      : 'text-white/50 hover:text-white/80'
-                      }`}
-                  >
-                    <span>{category.name}</span>
-                    <span className={`text-[10px] font-bold self-start mt-0.5 ${isActive ? 'text-charcoal/40' : 'text-white/20'}`}>
-                      {category.number}
-                    </span>
-                  </button>
-                );
-              })}
+            <div className="w-full flex justify-center px-4">
+              <div className="flex flex-wrap justify-center gap-2 w-full md:w-auto bg-charcoal dark:bg-black p-1 rounded-3xl md:rounded-full shadow-lg border border-white/5">
+                {categories.map((category) => {
+                  const isActive = activeTab === category.id;
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => setActiveTab(category.id)}
+                      className={`group relative w-[calc(50%-0.25rem)] md:w-auto flex items-center justify-center gap-1.5 px-2 sm:px-5 md:px-7 py-2.5 md:py-2.5 rounded-full transition-all duration-500 font-sans font-medium text-sm md:text-base whitespace-nowrap ${isActive
+                        ? 'bg-white text-charcoal shadow-sm border-2 border-black'
+                        : 'text-white/50 hover:text-white/80'
+                        }`}
+                    >
+                      <span>{category.name}</span>
+                      <span className={`text-[9px] md:text-[10px] font-bold self-start mt-0.5 ${isActive ? 'text-charcoal/40' : 'text-white/20'}`}>
+                        {category.number}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* <!-- Product Cards Carousel (Below) - Conditional Auto Scroll --> */}
@@ -895,7 +858,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 return (
                   <div
                     className="flex animate-scroll-reverse hover:pause gap-8 w-max"
-                    style={{ animationDuration: `${products.length * 6}s` }}
+                    style={{ animationDuration: `${Math.max(products.length * 6, 12)}s` }}
                   >
                     {[1, 2].map((loop) => (
                       <div key={loop} className="flex gap-8">
@@ -931,18 +894,18 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         </section>
         {/* ----------------------------------------------------------product end-------------------------------- */}
 
-        <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
-          <div className="text-center mb-16">
-            <span className="text-primary font-sans uppercase tracking-widest text-sm font-bold">
+        <section className="px-6 md:px-16 lg:px-24 py-16 md:py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
+          <div className="text-center mb-12 md:mb-16">
+            <span className="text-primary font-sans uppercase tracking-[0.2em] text-[10px] md:text-sm font-bold">
               Project Gallery
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mt-2 mb-4">Inside Our Worksites</h2>
-            <p className="premium-body max-w-xl mx-auto pb-4">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mt-2 mb-4">Inside Our Worksites</h2>
+            <p className="premium-body max-w-xl mx-auto pb-4 text-sm md:text-base">
               A glimpse of our scaffolding systems, industrial maintenance, and
               large-scale engineering operations across India.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-[150px] md:auto-rows-[200px] gap-3 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-[120px] md:auto-rows-[200px] gap-2 md:gap-4 grid-flow-dense">
             {galleryItems.slice(0, 10).map((item: TransformedGalleryItem) =>
               item.mediaType === 'video' ? (
                 <div key={item.id} className={`group relative overflow-hidden rounded-lg transition-all duration-500 hover:scale-105 ${item.gridClass}`}>
@@ -1067,7 +1030,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         <section className="mx-6 md:mx-16 lg:mx-24 my-24 lg:my-32 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-black text-white overflow-hidden relative rounded-2xl">
           <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-20 items-start">
             <div className="relative">
-              <h2 className="contact-title text-[72px] md:text-[110px] leading-[0.9] font-serif font-bold tracking-tight">
+              <h2 className="contact-title text-[52px] md:text-[110px] leading-[0.9] font-serif font-bold tracking-tight">
                 LET&apos;S <br />
                 GET IN <br />
                 TOUCH
