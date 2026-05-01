@@ -560,7 +560,6 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-xl leading-relaxed">
               Premium enterprise-level scaffolding solutions for refineries,
               chemical plants, and power sectors. Built on precision, safety,
-              and 8+ years of excellence.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
@@ -591,7 +590,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   </div>
                   <div>
                     <p className="text-2xl font-black text-charcoal dark:text-white">
-                      8+
+                      15+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                       Years Exp
@@ -660,7 +659,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </p>
               <div className="grid grid-cols-2 gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-3xl font-black text-primary">8+</h4>
+                  <h4 className="text-3xl font-black text-primary">15+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Years of Experience
                   </p>
@@ -690,7 +689,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <section className="xl:hidden px-6 md:px-20 pb-20 lg:pb-32 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
-            <p className="text-4xl font-black text-primary mb-2">8+</p>
+            <p className="text-4xl font-black text-primary mb-2">15+</p>
             <p className="text-sm font-bold text-gray-500 uppercase">
               Years of Experience
             </p>
