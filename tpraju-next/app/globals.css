@@ -99,7 +99,9 @@ html {
   height: 70px;
   border-radius: 50%;
   background: var(--color-primary);
-  animation: float 8s var(--ease-soft) infinite;
+  mix-blend-mode: difference;
+  z-index: 10;
+  animation: sway 8s ease-in-out infinite;
 }
 
 .form-group {
@@ -197,6 +199,22 @@ html {
   }
 }
 
+@keyframes sway {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate(15px, -10px) rotate(5deg);
+  }
+
+  66% {
+    transform: translate(-10px, 15px) rotate(-5deg);
+  }
+}
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -224,17 +242,19 @@ html {
   animation-play-state: paused;
 }
 
-.premium-scroll-mask {
-  mask-image: linear-gradient(to right,
-      transparent,
-      black 120px,
-      black calc(100% - 120px),
-      transparent);
-  -webkit-mask-image: linear-gradient(to right,
-      transparent,
-      black 120px,
-      black calc(100% - 120px),
-      transparent);
+@media (min-width: 550px) {
+  .premium-scroll-mask {
+    mask-image: linear-gradient(to right,
+        transparent,
+        black 120px,
+        black calc(100% - 120px),
+        transparent);
+    -webkit-mask-image: linear-gradient(to right,
+        transparent,
+        black 120px,
+        black calc(100% - 120px),
+        transparent);
+  }
 }
 
 body {
