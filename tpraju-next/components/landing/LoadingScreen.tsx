@@ -27,7 +27,7 @@ export function TPRCLoader() {
       <div className="flex flex-col items-center">
         {/* Text Reveal Container */}
         <div className="relative overflow-hidden py-1">
-          <h1 className="text-5xl md:text-7xl font-black tracking-[0.25em] text-charcoal dark:text-white animate-reveal">
+          <h1 className="text-5xl md:text-7xl font-serif tracking-[0.25em] text-charcoal dark:text-white animate-reveal">
             TPRC
           </h1>
         </div>

@@ -25,14 +25,31 @@
 }
 
 @theme inline {
-  --color-primary: #f2c40d;
-  --color-background-light: #f8f8f5;
-  --color-background-dark: #221e10;
-  --color-charcoal: #181711;
+  --color-primary: #e4b147;
+  --color-background-light: #fafafa;
+  --color-background-dark: #111111;
+  --color-charcoal: #1a1a1a;
+  --color-award-gold: #e4b147;
+  --color-award-gold-light: #e4c5a1;
   --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
   --radius-DEFAULT: 0.5rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
+}
+
+@layer utilities {
+  .premium-heading {
+    @apply font-serif font-bold leading-[1.05] tracking-tight;
+  }
+
+  .premium-label {
+    @apply font-bold uppercase tracking-[0.2em] text-[10px] md:text-[11px];
+  }
+
+  .premium-body {
+    @apply leading-relaxed text-gray-600 dark:text-gray-400;
+  }
 }
 
 /* Apple-like motion: soft deceleration, no snappy linear moves */
@@ -81,8 +98,10 @@ html {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: #f2c40d;
-  animation: float 8s var(--ease-soft) infinite;
+  background: var(--color-primary);
+  mix-blend-mode: difference;
+  z-index: 10;
+  animation: sway 8s ease-in-out infinite;
 }
 
 .form-group {
@@ -115,7 +134,7 @@ html {
 .form-group textarea:focus {
   outline: none;
   box-shadow: none;
-  border-bottom: 1px solid #f2c40d;
+  border-bottom: 1px solid var(--color-primary);
 }
 
 .form-group input:active,
@@ -140,7 +159,7 @@ html {
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  background: #f2c40d;
+  background: var(--color-primary);
   color: black;
   border: none;
   display: flex;
@@ -151,9 +170,9 @@ html {
 }
 
 .submit-btn:hover {
-  background: #f2c40d;
+  background: var(--color-primary);
   transform: translateX(8px) scale(1.04);
-  box-shadow: 0 12px 40px rgba(242, 196, 13, 0.35);
+  box-shadow: 0 12px 40px rgba(228, 177, 71, 0.35);
 }
 
 @keyframes fadeUp {
@@ -161,6 +180,7 @@ html {
     opacity: 0;
     transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -168,12 +188,30 @@ html {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-12px);
+  }
+}
+
+@keyframes sway {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate(15px, -10px) rotate(5deg);
+  }
+
+  66% {
+    transform: translate(-10px, 15px) rotate(-5deg);
   }
 }
 
@@ -181,17 +219,42 @@ html {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
 }
 
 .animate-scroll {
-  animation: scroll 8s linear infinite;
+  animation: scroll 20s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.animate-scroll:hover {
+.animate-scroll-reverse {
+  animation: scroll 20s linear infinite reverse;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.animate-scroll:hover,
+.animate-scroll-reverse:hover {
   animation-play-state: paused;
+}
+
+@media (min-width: 550px) {
+  .premium-scroll-mask {
+    mask-image: linear-gradient(to right,
+        transparent,
+        black 120px,
+        black calc(100% - 120px),
+        transparent);
+    -webkit-mask-image: linear-gradient(to right,
+        transparent,
+        black 120px,
+        black calc(100% - 120px),
+        transparent);
+  }
 }
 
 body {
@@ -234,7 +297,7 @@ body {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: #4C5B5C;
+  background: var(--color-charcoal);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -248,8 +311,8 @@ body {
 }
 
 .share-main:hover {
-  background: #f2c40c;
-  color: #000000;
+  background: #333333;
+  color: #ffffff;
   transform: scale(1.1);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
@@ -371,12 +434,10 @@ body {
 .certificate-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.75),
-    rgba(0, 0, 0, 0.35),
-    transparent
-  );
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0.35),
+      transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -411,7 +472,7 @@ body {
   box-shadow:
     0 15px 50px rgba(31, 31, 31, 0.35),
     0 0 0 0px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(242, 196, 13, 0);
+    0 0 40px rgba(228, 177, 71, 0);
 }
 
 .certificate-modal {
@@ -441,6 +502,7 @@ body {
     opacity: 0;
     transform: scale(0.92) translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
