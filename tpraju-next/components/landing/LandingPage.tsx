@@ -612,7 +612,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-charcoal dark:text-white">
-                      200+
+                      10+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                       Clients
@@ -663,7 +663,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">200+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">10+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Satisfied Clients
                   </p>
@@ -1105,21 +1105,8 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-3">
-                <div className="size-8 bg-primary rounded flex items-center justify-center text-charcoal">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 48 48"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
                 <h2 className="text-xl font-extrabold tracking-tight text-white">
-                  TP RAJU
+                  TP RAJU <span className="hidden sm:inline font-normal text-gray-500 text-sm">Constructions</span>
                 </h2>
               </div>
               <p className="text-sm premium-body">
