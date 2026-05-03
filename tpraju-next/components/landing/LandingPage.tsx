@@ -558,7 +558,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               ISO 9001:2015 Certified
             </div>
             <h1 className="text-4xl md:text-7xl premium-heading text-charcoal dark:text-white">
-              Leaders in Scaffolding &amp; Industrial{" "}
+              Leaders in Scaffolding <span style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span> Industrial{" "}
               <span className="text-primary italic">Engineering</span> Services
             </h1>
             <p className="text-lg md:text-xl premium-body max-w-xl">
@@ -648,7 +648,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 About TP Raju Engineering Contractor
               </span>
               <h2 className="text-3xl md:text-5xl premium-heading">
-                Building Industrial Safety &amp; Engineering Excellence
+                Building Industrial Safety <span style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span> Engineering Excellence
               </h2>
               <p className="text-lg premium-body">
                 TP Raju Engineering Contractor is a trusted name in scaffolding
