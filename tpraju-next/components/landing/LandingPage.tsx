@@ -1239,13 +1239,21 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <p className="text-xs">
               © 2023 TP Raju Constructions. All rights reserved.
             </p>
-            <div className="flex gap-8">
+            <div className="flex items-center gap-8">
               <a className="text-xs hover:text-white transition-colors" href="#">
                 Privacy Policy
               </a>
               <a className="text-xs hover:text-white transition-colors" href="#">
                 Terms of Service
               </a>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-primary hover:text-charcoal transition-colors border border-white/10 hover:border-primary text-white"
+                aria-label="Scroll to top"
+                title="Go to top"
+              >
+                <span className="material-symbols-outlined text-lg">arrow_upward</span>
+              </button>
             </div>
           </div>
         </div>
