@@ -482,52 +482,39 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
       <header className="sticky top-0 z-50 w-full border-b border-gray-200/50 dark:border-gray-800/50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md transition-[background-color,backdrop-filter,border-color] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="size-8 bg-primary rounded flex items-center justify-center text-charcoal">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 48 48"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
             <div className="text-lg md:text-xl font-extrabold tracking-tight text-charcoal dark:text-white leading-none">
               TP RAJU{" "}
-              <span className="hidden sm:inline font-normal text-gray-500">Engineering</span>
+              <span className="hidden sm:inline font-normal text-gray-500">Constructions</span>
             </div>
           </div>
           <nav className="hidden lg:flex items-center gap-10">
             <a
               className="text-sm font-semibold hover:text-primary transition-colors"
-              href="#"
+              href="#home"
             >
               Home
             </a>
             <a
               className="text-sm font-semibold hover:text-primary transition-colors"
-              href="#"
+              href="#about"
             >
               About
             </a>
             <a
               className="text-sm font-semibold hover:text-primary transition-colors"
-              href="#"
+              href="#clients"
             >
               Major Clients
             </a>
             <a
               className="text-sm font-semibold hover:text-primary transition-colors"
-              href="#"
+              href="#projects"
             >
               Projects
             </a>
             <a
               className="text-sm font-semibold hover:text-primary transition-colors"
-              href="#"
+              href="#products"
             >
               Products
             </a>
@@ -538,17 +525,17 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               Gallery
             </a> */}
           </nav>
-          <button
-            type="button"
+          <a
+            href="#contact"
             className="bg-primary hover:opacity-90 text-charcoal px-4 md:px-5 py-2 rounded-full font-bold text-xs md:text-sm whitespace-nowrap shadow-sm transition-all"
           >
             Contact Us
-          </button>
+          </a>
         </div>
       </header>
 
       <main className="max-w-[1440px] mx-auto">
-        <section className="px-6 md:px-16 lg:px-24 pt-10 lg:pt-16 pb-16 lg:pb-24 grid lg:grid-cols-2 gap-16 items-center">
+        <section id="home" className="px-6 md:px-16 lg:px-24 pt-10 lg:pt-16 pb-16 lg:pb-24 grid lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col gap-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-primary premium-label">
               <span className="relative flex h-2 w-2">
@@ -558,7 +545,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               ISO 9001:2015 Certified
             </div>
             <h1 className="text-4xl md:text-7xl premium-heading text-charcoal dark:text-white">
-              Leaders in Scaffolding &amp; Industrial{" "}
+              Leaders in Scaffolding <span style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span> Industrial{" "}
               <span className="text-primary italic">Engineering</span> Services
             </h1>
             <p className="text-lg md:text-xl premium-body max-w-xl">
@@ -567,19 +554,19 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               and 8+ years of excellence.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button
-                type="button"
+              <a
+                href="#contact"
                 className="bg-primary hover:opacity-90 text-charcoal px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
               >
                 Contact Us{" "}
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </button>
-              <button
-                type="button"
+              </a>
+              <a
+                href="#products"
                 className="border-2 border-charcoal/10 dark:border-white/10 hover:bg-charcoal hover:text-white dark:hover:bg-white dark:hover:text-charcoal px-8 py-4 rounded-full font-bold text-base transition-all"
               >
                 View Products
-              </button>
+              </a>
             </div>
           </div>
           <div className="relative">
@@ -625,7 +612,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-charcoal dark:text-white">
-                      200+
+                      10+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                       Clients
@@ -645,13 +632,13 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             />
             <div className="flex flex-col gap-6">
               <span className="text-primary premium-label">
-                About TP Raju Engineering Contractor
+                About TP Raju Constructions
               </span>
               <h2 className="text-3xl md:text-5xl premium-heading">
-                Building Industrial Safety &amp; Engineering Excellence
+                Building Industrial Safety <span style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span> Engineering Excellence
               </h2>
               <p className="text-lg premium-body">
-                TP Raju Engineering Contractor is a trusted name in scaffolding
+                TP Raju Constructions is a trusted name in scaffolding
                 rental and industrial engineering services, delivering safe and
                 reliable solutions for refineries, chemical plants, power plants
                 and heavy industries across India.
@@ -676,7 +663,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">200+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">10+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Satisfied Clients
                   </p>
@@ -694,7 +681,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         {/* Stats section removed to prevent duplication as it's already in the About grid above */}
 
-        <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
+        <section id="clients" className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-16">
             <span className="text-primary premium-label">
               Trusted By Industry Leaders
@@ -736,7 +723,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
         </section>
 
-        <div id="projects-stack-container" className="relative pt-24 pb-0 bg-white dark:bg-zinc-900/50 no-reveal">
+        <div id="projects" className="relative pt-24 pb-0 bg-white dark:bg-zinc-900/50 no-reveal">
           <div className="px-6 md:px-16 lg:px-24 mb-16 shrink-0 text-center">
             <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight mb-2">
               Featured Projects
@@ -788,7 +775,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
 
 
-        <section className="relative z-10 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-[#fafafa]">
+        <section id="products" className="relative z-10 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-[#fafafa]">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Industrial Hardware Store</h2>
             <p className="premium-body max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use.</p>
@@ -894,7 +881,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         </section>
         {/* ----------------------------------------------------------product end-------------------------------- */}
 
-        <section className="px-6 md:px-16 lg:px-24 py-16 md:py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
+        <section id="gallery" className="px-6 md:px-16 lg:px-24 py-16 md:py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-12 md:mb-16">
             <span className="text-primary font-sans uppercase tracking-[0.2em] text-[10px] md:text-sm font-bold">
               Project Gallery
@@ -1027,7 +1014,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         </section>
 
 
-        <section className="mx-6 md:mx-16 lg:mx-24 my-24 lg:my-32 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-black text-white overflow-hidden relative rounded-2xl">
+        <section id="contact" className="mx-6 md:mx-16 lg:mx-24 my-24 lg:my-32 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-black text-white overflow-hidden relative rounded-2xl">
           <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-20 items-start">
             <div className="relative">
               <h2 className="contact-title text-[52px] md:text-[110px] leading-[0.9] font-serif font-bold tracking-tight">
@@ -1118,21 +1105,8 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-3">
-                <div className="size-8 bg-primary rounded flex items-center justify-center text-charcoal">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 48 48"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
                 <h2 className="text-xl font-extrabold tracking-tight text-white">
-                  TP RAJU
+                  TP RAJU <span className="hidden sm:inline font-normal text-gray-500 text-sm">Constructions</span>
                 </h2>
               </div>
               <p className="text-sm premium-body">
@@ -1147,27 +1121,27 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               </h4>
               <ul className="flex flex-col gap-4 text-sm">
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#">
+                  <a className="hover:text-primary transition-colors" href="#about">
                     About Company
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#">
+                  <a className="hover:text-primary transition-colors" href="#home">
                     Our Services
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#">
+                  <a className="hover:text-primary transition-colors" href="#products">
                     Product Catalogue
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#">
+                  <a className="hover:text-primary transition-colors" href="#awards">
                     Safety Standards
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#">
+                  <a className="hover:text-primary transition-colors" href="#projects">
                     Latest Projects
                   </a>
                 </li>
@@ -1263,7 +1237,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
           <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-xs">
-              © 2023 TP Raju Engineering Contractor. All rights reserved.
+              © 2023 TP Raju Constructions. All rights reserved.
             </p>
             <div className="flex gap-8">
               <a className="text-xs hover:text-white transition-colors" href="#">
