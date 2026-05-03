@@ -11,7 +11,7 @@ interface AwardsSectionProps {
 
 export function AwardsSection({ onOpenCertificate }: AwardsSectionProps) {
   return (
-    <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-[#fafafa]">
+    <section id="awards" className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-[#fafafa]">
       {/* Title Section */}
       <div className="text-center mb-16 flex flex-col items-center">
         <div className="flex items-center gap-6 mb-4">
