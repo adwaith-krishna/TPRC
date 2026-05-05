@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  Fragment,
 } from "react";
 import { CertificateModal } from "./CertificateModal";
 import { ShareFloating } from "./ShareFloating";
@@ -17,6 +18,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 
 import { TPRCLoader } from "./LoadingScreen";
 import { Project, Product, GalleryItem, Client } from "@/types/sanity";
+import { AnimatedText, AnimatedContainer, AnimatedWord } from "./AnimatedText";
 
 const HERO_BG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuCWASYnz6kODAfg1YQ7cNgUaCc6Qf64cMUfUHa-QNDn1FrMKLUdQdl3YTQHI8hCfUECTGZghv4-X3PzmTWa1V3QJOSi4ifkXFl9DBLxqsCjjWkGdPK2iQIFEFWmJ_Be1ygq8HgEgr-tk8-CPTuhtc4DjiKfL4OnIogfAvI4svCNTlMf5nNGIFUPaIUwtjhC0vjyHufhH0MTJwT3Z9r8iuUVLhjnrFHeJNJ3rsijo4Z820RAIbo4bSFdhdM--vU7TxWWDxHSErUfIfM7";
@@ -535,25 +537,88 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
       </header>
 
       <main className="max-w-[1440px] mx-auto">
-        <section id="home" className="px-6 md:px-16 lg:px-24 pt-10 lg:pt-16 pb-16 lg:pb-24 grid lg:grid-cols-2 gap-16 items-center">
+        <section id="home" className="px-6 md:px-16 lg:px-24 pt-10 lg:pt-16 pb-16 lg:pb-24 grid lg:grid-cols-2 gap-16 items-center no-reveal">
           <div className="flex flex-col gap-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-primary premium-label">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-primary premium-label self-start"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
               </span>
               ISO 9001:2015 Certified
-            </div>
-            <h1 className="text-4xl md:text-7xl premium-heading text-charcoal dark:text-white">
-              Leaders in Scaffolding <span style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span> Industrial{" "}
-              <span className="text-primary italic">Engineering</span> Services
-            </h1>
-            <p className="text-lg md:text-xl premium-body max-w-xl">
-              Premium enterprise-level scaffolding solutions for refineries,
-              chemical plants, and power sectors. Built on precision, safety,
-              and 8+ years of excellence.
-            </p>
-            <div className="flex flex-wrap gap-4">
+            </motion.div>
+            <motion.h1 
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.08, delayChildren: 0.1 }
+                }
+              }}
+              className="text-4xl md:text-7xl premium-heading text-charcoal dark:text-white"
+            >
+              {[
+                "Leaders", "in", "Scaffolding", 
+                <span key="amp" style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span>, 
+                "Industrial", 
+                <span key="eng" className="text-primary italic">Engineering</span>, 
+                "Services"
+              ].map((word, i) => (
+                <Fragment key={i}>
+                  <span className="inline-block overflow-hidden align-bottom">
+                    <motion.span 
+                      className="inline-block"
+                      variants={{
+                        hidden: { opacity: 0, y: 30 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
+                  {i !== 6 && " "}
+                </Fragment>
+              ))}
+            </motion.h1>
+            <motion.p 
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.04, delayChildren: 0.3 }
+                }
+              }}
+              className="text-lg md:text-xl premium-body max-w-xl"
+            >
+              {"Premium enterprise-level scaffolding solutions for refineries, chemical plants, and power sectors. Built on precision, safety, and 8+ years of excellence.".split(" ").map((word, i, arr) => (
+                <Fragment key={i}>
+                  <span className="inline-block overflow-hidden align-bottom">
+                    <motion.span 
+                      className="inline-block"
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
+                  {i !== arr.length - 1 && " "}
+                </Fragment>
+              ))}
+            </motion.p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap gap-4"
+            >
               <a
                 href="#contact"
                 className="bg-primary hover:opacity-90 text-charcoal px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
@@ -567,15 +632,23 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               >
                 View Products
               </a>
-            </div>
+            </motion.div>
           </div>
           <div className="relative">
-            <div
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="w-full aspect-[4/5] md:aspect-square bg-center bg-cover rounded-xl shadow-2xl"
               style={{ backgroundImage: `url("${HERO_BG}")` }}
             />
             <div className="absolute inset-0 hidden xl:block pointer-events-none">
-              <div className="absolute top-[20%] -left-8">
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={isLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute top-[20%] -left-8"
+              >
                 <div className="glass p-6 h-[100px] rounded-2xl shadow-2xl border border-white/20 flex items-center gap-4 min-w-[220px] backdrop-blur-xl">
                   <div className="size-12 rounded-lg bg-primary text-charcoal flex items-center justify-center shadow-md">
                     <span className="material-symbols-outlined">engineering</span>
@@ -589,8 +662,13 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className="absolute top-[50%] -translate-y-1/2 -right-8">
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                animate={isLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute top-[50%] -translate-y-1/2 -right-8"
+              >
                 <div className="glass p-6 h-[100px] rounded-2xl shadow-2xl border border-white/20 flex items-center gap-4 min-w-[220px] backdrop-blur-xl">
                   <div className="size-12 rounded-lg bg-primary text-charcoal flex items-center justify-center shadow-md">
                     <span className="material-symbols-outlined">checklist</span>
@@ -604,8 +682,13 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className="absolute top-[56%] -left-8">
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={isLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute top-[56%] -left-8"
+              >
                 <div className="glass p-6 h-[100px] rounded-2xl shadow-2xl border border-white/20 flex items-center gap-4 min-w-[220px] backdrop-blur-xl">
                   <div className="size-12 rounded-lg bg-primary text-charcoal flex items-center justify-center shadow-md">
                     <span className="material-symbols-outlined">groups</span>
@@ -619,36 +702,51 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
         <section id="about" className="px-6 md:px-16 lg:px-24 py-16 md:py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl relative overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div
-              className="hidden lg:block w-full aspect-[4/5] bg-center bg-cover rounded-2xl shadow-2xl"
-              style={{ backgroundImage: `url("${ABOUT_IMG}")` }}
-            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden lg:block w-full aspect-[4/5] rounded-2xl shadow-2xl overflow-hidden no-reveal"
+            >
+              <motion.div
+                initial={{ scale: 1.5 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full h-full bg-center bg-cover"
+                style={{ backgroundImage: `url("${ABOUT_IMG}")` }}
+              />
+            </motion.div>
             <div className="flex flex-col gap-6">
               <span className="text-primary premium-label">
                 About TP Raju Constructions
               </span>
-              <h2 className="text-3xl md:text-5xl premium-heading">
-                Building Industrial Safety <span style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span> Engineering Excellence
-              </h2>
-              <p className="text-lg premium-body">
-                TP Raju Constructions is a trusted name in scaffolding
-                rental and industrial engineering services, delivering safe and
-                reliable solutions for refineries, chemical plants, power plants
-                and heavy industries across India.
-              </p>
-              <p className="premium-body">
-                Since our establishment, we have focused on quality
-                workmanship, modern equipment, and strict safety compliance. Our
-                experienced workforce and engineering team ensure every project
-                is executed efficiently and on schedule.
-              </p>
+              <AnimatedContainer el="h2" className="text-3xl md:text-5xl premium-heading">
+                <AnimatedWord>Building</AnimatedWord>{" "}
+                <AnimatedWord>Industrial</AnimatedWord>{" "}
+                <AnimatedWord>Safety</AnimatedWord>{" "}
+                <AnimatedWord><span style={{ fontFamily: '"Noto Serif", "Noto Sans", serif' }}>&amp;</span></AnimatedWord>{" "}
+                <AnimatedWord>Engineering</AnimatedWord>{" "}
+                <AnimatedWord>Excellence</AnimatedWord>
+              </AnimatedContainer>
+              <AnimatedText 
+                el="p"
+                className="text-lg premium-body"
+                text="TP Raju Constructions is a trusted name in scaffolding rental and industrial engineering services, delivering safe and reliable solutions for refineries, chemical plants, power plants and heavy industries across India."
+              />
+              <AnimatedText 
+                el="p"
+                className="premium-body"
+                text="Since our establishment, we have focused on quality workmanship, modern equipment, and strict safety compliance. Our experienced workforce and engineering team ensure every project is executed efficiently and on schedule."
+              />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
                   <h4 className="text-4xl font-bold text-primary mb-2">8+</h4>
@@ -686,11 +784,12 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <span className="text-primary premium-label">
               Trusted By Industry Leaders
             </span>
-            <h2 className="text-4xl md:text-5xl premium-heading mt-2 mb-4">Our Major Clients</h2>
-            <p className="premium-body max-w-xl mx-auto">
-              We are proud to collaborate with some of India&apos;s most
-              respected infrastructure, energy, and industrial organizations.
-            </p>
+            <AnimatedText el="h2" text="Our Major Clients" className="text-4xl md:text-5xl premium-heading mt-2 mb-4" />
+            <AnimatedText 
+              el="p"
+              text="We are proud to collaborate with some of India's most respected infrastructure, energy, and industrial organizations."
+              className="premium-body max-w-xl mx-auto"
+            />
           </div>
           <div className="relative overflow-hidden premium-scroll-mask">
             <div
@@ -725,12 +824,16 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <div id="projects" className="relative pt-24 pb-0 bg-white dark:bg-zinc-900/50 no-reveal">
           <div className="px-6 md:px-16 lg:px-24 mb-16 shrink-0 text-center">
-            <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight mb-2">
-              Featured Projects
-            </h2>
-            <p className="text-gray-500 font-sans uppercase tracking-widest text-sm font-bold">
-              Industry standard excellence
-            </p>
+            <AnimatedText 
+              el="h2"
+              text="Featured Projects"
+              className="text-3xl md:text-5xl font-serif font-bold tracking-tight mb-2"
+            />
+            <AnimatedText 
+              el="p"
+              text="Industry standard excellence"
+              className="text-gray-500 font-sans uppercase tracking-widest text-sm font-bold"
+            />
           </div>
           <div
             className="flex flex-col gap-12 px-6 md:px-16 lg:px-24"
@@ -757,12 +860,16 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                       <span className="bg-primary text-charcoal px-5 py-1.5 rounded-full text-xs font-bold tracking-wide mb-4 inline-block shadow-lg">
                         {project.category}
                       </span>
-                      <h3 className="text-white text-3xl md:text-5xl font-serif tracking-tight mb-3">
-                        {project.title}
-                      </h3>
-                      <p className="text-white/80 md:text-lg max-w-2xl leading-relaxed">
-                        {project.description}
-                      </p>
+                      <AnimatedText 
+                        el="h3"
+                        text={project.title}
+                        className="text-white text-3xl md:text-5xl font-serif tracking-tight mb-3"
+                      />
+                      <AnimatedText 
+                        el="p"
+                        text={project.description}
+                        className="text-white/80 md:text-lg max-w-2xl leading-relaxed"
+                      />
                     </div>
                   </div>
                 </div>
@@ -777,8 +884,12 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
 
         <section id="products" className="relative z-10 px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-[#fafafa]">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Industrial Hardware Store</h2>
-            <p className="premium-body max-w-xl mx-auto">We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use.</p>
+            <AnimatedText el="h2" text="Industrial Hardware Store" className="text-4xl md:text-5xl font-serif font-bold mb-4" />
+            <AnimatedText 
+              el="p"
+              text="We supply premium grade Cuplock systems, pipes, and scaffolding components certified for heavy-duty industrial use."
+              className="premium-body max-w-xl mx-auto"
+            />
           </div>
 
           <div className="flex flex-col items-center gap-16">

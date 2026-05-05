@@ -10,7 +10,7 @@ export function TPRCLoader() {
       setPercent((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => setExit(true), 800); 
+          setTimeout(() => setExit(true), 800);
           return 100;
         }
         return prev + 1;
@@ -23,7 +23,7 @@ export function TPRCLoader() {
 
   return (
     <div className={`fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-[#0a0a0a] transition-opacity duration-1000 ${percent === 100 ? "opacity-0" : "opacity-100"}`}>
-      
+
       <div className="flex flex-col items-center">
         {/* Text Reveal Container */}
         <div className="relative overflow-hidden py-1">
@@ -34,9 +34,9 @@ export function TPRCLoader() {
 
         {/* Middle-Out Progress Line */}
         <div className="relative h-[1.5px] w-48 md:w-64 bg-gray-100 dark:bg-gray-900 mt-4 overflow-hidden">
-          <div 
+          <div
             className="absolute top-0 left-1/2 h-full bg-primary transition-all duration-500 ease-out"
-            style={{ 
+            style={{
               width: `${percent}%`,
               transform: "translateX(-50%)" // Keeps the bar centered as it grows
             }}
