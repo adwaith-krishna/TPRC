@@ -1,15 +1,68 @@
 "use client";
 
+import { Award } from "@/types/sanity";
+import { urlFor } from "@/lib/sanity.image";
+
 const CERT1 = "https://img.freepik.com/free-vector/certificate-template-design_53876-59034.jpg";
 const CERT2 = "https://img.freepik.com/free-vector/certificate-template-design_53876-59037.jpg";
 const TROPHY_CUP = "https://img.freepik.com/free-photo/champion-gold-cup-trophy-white-background-3d-rendering_460848-10332.jpg";
 const TROPHY_STAR = "https://img.freepik.com/premium-photo/golden-star-award-with-black-base-it_940464-32536.jpg";
 
 interface AwardsSectionProps {
+  awards?: Award[];
   onOpenCertificate: (src: string) => void;
 }
 
-export function AwardsSection({ onOpenCertificate }: AwardsSectionProps) {
+const FALLBACK_AWARDS: (Award & { imageUrl?: string })[] = [
+  {
+    _id: "cert1",
+    title: "Google UX Design Professional Certificate",
+    issuer: "Google",
+    year: "2024",
+    badgeText: "Certified",
+    badgeType: "blue",
+    image: { _type: "image", asset: { _ref: "fallback-cert1", _type: "reference" } },
+    imageUrl: CERT1,
+    isCertificate: true
+  },
+  {
+    _id: "trophy1",
+    title: "Best Startup Award 2024",
+    issuer: "Kerala Startup Mission",
+    year: "2024",
+    badgeText: "Winner",
+    badgeType: "gold",
+    image: { _type: "image", asset: { _ref: "fallback-trophy1", _type: "reference" } },
+    imageUrl: TROPHY_STAR,
+    isCertificate: false
+  },
+  {
+    _id: "cert2",
+    title: "ISO 9001:2015 Quality Management",
+    issuer: "International Organization for Standardization",
+    year: "2023",
+    badgeText: "Certified",
+    badgeType: "blue",
+    image: { _type: "image", asset: { _ref: "fallback-cert2", _type: "reference" } },
+    imageUrl: CERT2,
+    isCertificate: true
+  },
+  {
+    _id: "trophy2",
+    title: "Top Performer Award 2023",
+    issuer: "National Business Excellence Awards",
+    year: "2023",
+    badgeText: "Top Performer",
+    badgeType: "gold",
+    image: { _type: "image", asset: { _ref: "fallback-trophy2", _type: "reference" } },
+    imageUrl: TROPHY_CUP,
+    isCertificate: false
+  }
+];
+
+export function AwardsSection({ awards, onOpenCertificate }: AwardsSectionProps) {
+  const displayAwards = awards && awards.length > 0 ? awards : FALLBACK_AWARDS;
+
   return (
     <section id="awards" className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-[#fafafa]">
       {/* Title Section */}
@@ -77,77 +130,51 @@ export function AwardsSection({ onOpenCertificate }: AwardsSectionProps) {
           </div>
 
           <div className="lg:w-[70%] w-full relative overflow-hidden premium-scroll-mask">
-            <div 
+            <div
               className="flex animate-scroll hover:pause gap-6 w-max py-2"
-              style={{ animationDuration: '12s' }}
+              style={{ animationDuration: `${Math.max(displayAwards.length * 3, 12)}s` }}
             >
               {[1, 2].map((loop) => (
                 <div key={loop} className="flex gap-6">
-                  {/* Card 1 */}
-                  <div className="w-[280px] md:w-[320px] bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 p-5 flex flex-col shrink-0">
-                    <div className="relative mb-6 bg-gray-50 rounded-lg p-2 h-[220px] flex items-center justify-center cursor-pointer overflow-hidden border border-gray-100" onClick={() => onOpenCertificate(CERT1)}>
-                      <span className="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10">Certified</span>
-                      <img src={CERT1} className="w-full h-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-500" alt="Certificate" />
-                    </div>
-                    <h4 className="font-bold text-[#1a1a1a] text-lg leading-snug mb-1 whitespace-normal">Google UX Design <br /> Professional Certificate</h4>
-                    <p className="text-gray-500 text-sm mb-4">Google</p>
-                    <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-2 text-gray-400 text-xs font-bold">
-                      <span className="material-symbols-outlined text-[16px]">calendar_today</span>
-                      2024
-                    </div>
-                  </div>
+                  {displayAwards.map((award) => {
+                    const isGold = award.badgeType === "gold" || award.badgeText?.toLowerCase() === "winner" || award.badgeText?.toLowerCase() === "top performer";
+                    const badgeBg = isGold ? "bg-[var(--color-award-gold)]" : "bg-blue-600";
+                    const imageUrl = (award as any).imageUrl || (award.image ? urlFor(award.image).url() : "");
 
-                  {/* Card 2 */}
-                  <div className="w-[280px] md:w-[320px] bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 p-5 flex flex-col shrink-0">
-                    <div className="relative mb-6 bg-gray-50 rounded-lg p-2 h-[220px] flex items-center justify-center overflow-hidden border border-gray-100">
-                      <span className="absolute top-3 right-3 bg-[var(--color-award-gold)] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10">Winner</span>
-                      <img src={TROPHY_STAR} className="w-full h-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-500" alt="Trophy" />
-                    </div>
-                    <h4 className="font-bold text-[#1a1a1a] text-lg leading-snug mb-1 whitespace-normal">Best Startup Award <br /> 2024</h4>
-                    <p className="text-gray-500 text-sm mb-4">Kerala Startup Mission</p>
-                    <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-2 text-gray-400 text-xs font-bold">
-                      <span className="material-symbols-outlined text-[16px]">calendar_today</span>
-                      2024
-                    </div>
-                  </div>
-
-                  {/* Card 3 */}
-                  <div className="w-[280px] md:w-[320px] bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 p-5 flex flex-col shrink-0">
-                    <div className="relative mb-6 bg-gray-50 rounded-lg p-2 h-[220px] flex items-center justify-center cursor-pointer overflow-hidden border border-gray-100" onClick={() => onOpenCertificate(CERT2)}>
-                      <span className="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10">Certified</span>
-                      <img src={CERT2} className="w-full h-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-500" alt="Certificate" />
-                    </div>
-                    <h4 className="font-bold text-[#1a1a1a] text-lg leading-snug mb-1 whitespace-normal">ISO 9001:2015 <br /> Quality Management</h4>
-                    <p className="text-gray-500 text-sm mb-4">International Organization for Standardization</p>
-                    <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-2 text-gray-400 text-xs font-bold">
-                      <span className="material-symbols-outlined text-[16px]">calendar_today</span>
-                      2023
-                    </div>
-                  </div>
-
-                  {/* Card 4 */}
-                  <div className="w-[280px] md:w-[320px] bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 p-5 flex flex-col shrink-0">
-                    <div className="relative mb-6 bg-gray-50 rounded-lg p-2 h-[220px] flex items-center justify-center overflow-hidden border border-gray-100">
-                      <span className="absolute top-3 right-3 bg-[var(--color-award-gold)] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10">Top Performer</span>
-                      <img src={TROPHY_CUP} className="w-full h-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-500" alt="Trophy" />
-                    </div>
-                    <h4 className="font-bold text-[#1a1a1a] text-lg leading-snug mb-1 whitespace-normal">Top Performer <br /> Award 2023</h4>
-                    <p className="text-gray-500 text-sm mb-4">National Business Excellence Awards</p>
-                    <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-2 text-gray-400 text-xs font-bold">
-                      <span className="material-symbols-outlined text-[16px]">calendar_today</span>
-                      2023
-                    </div>
-                  </div>
+                    return (
+                      <div key={`${loop}-${award._id}`} className="w-[280px] md:w-[320px] bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 p-5 flex flex-col shrink-0">
+                        <div
+                          className={`relative mb-6 bg-gray-50 rounded-lg p-2 h-[220px] flex items-center justify-center ${award.isCertificate ? 'cursor-pointer' : ''} overflow-hidden border border-gray-100`}
+                          onClick={() => {
+                            if (award.isCertificate && imageUrl) {
+                              onOpenCertificate(imageUrl);
+                            }
+                          }}
+                        >
+                          {award.badgeText && (
+                            <span className={`absolute top-3 right-3 ${badgeBg} text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10`}>
+                              {award.badgeText}
+                            </span>
+                          )}
+                          {imageUrl && (
+                            <img src={imageUrl} className="w-full h-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-500" alt={award.title} />
+                          )}
+                        </div>
+                        <h4 className="font-bold text-[#1a1a1a] text-lg leading-snug mb-1 whitespace-normal">{award.title}</h4>
+                        <p className="text-gray-500 text-sm mb-4">{award.issuer}</p>
+                        <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-2 text-gray-400 text-xs font-bold">
+                          <span className="material-symbols-outlined text-[16px]">calendar_today</span>
+                          {award.year}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-
-
-
-
     </section>
   );
 }

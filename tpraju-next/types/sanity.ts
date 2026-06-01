@@ -37,3 +37,15 @@ export interface Client {
   name: string;
   logo: SanityImage;
 }
+
+export interface Award {
+  _id: string;
+  title: string;
+  issuer: string;
+  year: string;
+  badgeText?: string;
+  badgeType?: 'gold' | 'blue';
+  image: SanityImage;
+  isCertificate?: boolean;
+}
+

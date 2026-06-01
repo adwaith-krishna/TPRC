@@ -1,0 +1,16 @@
+# TP Raju Constructions (TPRC)
+
+Public architecture guide for TP Raju Constructions web platform.
+
+## Tech Stack
+- **Frontend**: Next.js (App Router), Tailwind CSS, Framer Motion, Lenis Scroll.
+- **CMS**: Sanity integration for dynamic landing page resources.
+
+## Public Routes
+- `/`: Landing page (services list, portfolio milestones, dynamic awards, product catalog tabs, and public contact form).
+- `/gallery`: Media gallery page (photos and loop-playing videos of scaffolding worksites).
+- `/robots.txt`: Search crawler directions.
+- `/sitemap.xml`: Sitemap indexing public routes.
+
+## Content Models
+- Publicly visible models include Scaffolding Products, Product Categories, Featured Projects, Partner Clients, Safety Awards, and Gallery Media.

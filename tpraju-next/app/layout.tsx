@@ -14,9 +14,72 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "TP Raju Engineering Landing Page",
+  title: "TP Raju Constructions | Scaffolding Rental & Industrial Engineering",
   description:
-    "Premium scaffolding and industrial engineering services — TP Raju Engineering Contractor.",
+    "Premium scaffolding rentals, mechanical fabrication, and industrial engineering services in India since 2008. Safe, reliable, and ISO 9001:2015 certified.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://tpraju.com"),
+  openGraph: {
+    title: "TP Raju Constructions | Scaffolding Rental & Industrial Engineering",
+    description: "Premium scaffolding rentals, mechanical fabrication, and industrial engineering services in India since 2008.",
+    url: "https://tpraju.com",
+    siteName: "TP Raju Constructions",
+    images: [
+      {
+        url: "/left.png",
+        width: 1200,
+        height: 630,
+        alt: "TP Raju Constructions Scaffolding & Engineering Services",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TP Raju Constructions | Scaffolding Rental & Industrial Engineering",
+    description: "Premium scaffolding rentals, mechanical fabrication, and industrial engineering services in India since 2008.",
+    images: ["/left.png"],
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ConstructionBusiness",
+  "name": "TP Raju Constructions",
+  "image": "https://tpraju.com/left.png",
+  "@id": "https://tpraju.com/#organization",
+  "url": "https://tpraju.com",
+  "telephone": "+919447590954",
+  "email": "tprconstructions2020@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "16/313A, TPR Business Plaza building, Near BPCL-KR, Ambalamugal P.O.",
+    "addressLocality": "Ernakulam",
+    "addressRegion": "Kerala",
+    "postalCode": "682302",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 9.9816,
+    "longitude": 76.2999
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "08:00",
+    "closes": "18:00"
+  },
+  "sameAs": [
+    "https://www.instagram.com/tprconstructions/?hl=en"
+  ]
 };
 
 export default function RootLayout({
@@ -30,6 +93,10 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body
