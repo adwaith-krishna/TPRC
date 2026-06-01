@@ -4,4 +4,4 @@ import { SanityImage } from "@/types/sanity"
 
 const builder = imageUrlBuilder(client)
 
-export const urlFor = (source: SanityImage) => builder.image(source)
+export const urlFor = (source: SanityImage) => builder.image(source).auto('format')
