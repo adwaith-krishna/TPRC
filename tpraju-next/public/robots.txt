@@ -1,0 +1,8 @@
+# Allow search engines to index the main site, but block any admin or studio paths
+User-agent: *
+Allow: /
+Disallow: /studio/
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://tpraju.com/sitemap.xml

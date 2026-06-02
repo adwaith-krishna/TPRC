@@ -17,7 +17,7 @@ import Lenis from "lenis";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 import { TPRCLoader } from "./LoadingScreen";
-import { Project, Product, GalleryItem, Client } from "@/types/sanity";
+import { Project, Product, GalleryItem, Client, Award } from "@/types/sanity";
 import { AnimatedText, AnimatedContainer, AnimatedWord } from "./AnimatedText";
 
 const HERO_BG =
@@ -245,9 +245,10 @@ interface LandingPageProps {
   projects: Project[];
   gallery: GalleryItem[];
   products: Product[];
+  awards: Award[];
 }
 
-export function LandingPage({ clients, projects, gallery, products }: LandingPageProps) {
+export function LandingPage({ clients, projects, gallery, products, awards }: LandingPageProps) {
   // Transform Sanity products into categories
   const categories = transformProductsToCategories(products);
 
@@ -1144,7 +1145,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
         </section>
         */}
 
-        <AwardsSection onOpenCertificate={openCertificate} />
+        <AwardsSection awards={awards} onOpenCertificate={openCertificate} />
 
         {/* <!-- Testimonials --> */}
         <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">

@@ -20,7 +20,7 @@ export const textRevealAnimation = {
 
 interface AnimatedTextProps {
   text: string;
-  el?: keyof JSX.IntrinsicElements;
+  el?: React.ElementType;
   className?: string;
   once?: boolean;
   type?: "word" | "character";
@@ -42,9 +42,10 @@ export const AnimatedText = ({
   // Split into words or characters
   const itemArray = type === "word" ? text.split(" ") : text.split("");
   const defaultStagger = type === "word" ? 0.04 : 0.02;
+  const Component = Wrapper as React.ElementType;
 
   return (
-    <Wrapper className={className}>
+    <Component className={className}>
       <motion.span
         initial="hidden"
         animate={trigger === "mount" ? "visible" : undefined}
@@ -71,7 +72,7 @@ export const AnimatedText = ({
         ))}
       </motion.span>
       <span className="sr-only">{text}</span>
-    </Wrapper>
+    </Component>
   );
 };
 
@@ -85,7 +86,7 @@ export const AnimatedContainer = ({
   trigger = "inView",
 }: {
   children: React.ReactNode;
-  el?: keyof JSX.IntrinsicElements;
+  el?: React.ElementType;
   className?: string;
   once?: boolean;
   delay?: number;
