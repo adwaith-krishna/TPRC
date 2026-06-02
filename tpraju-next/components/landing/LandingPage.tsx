@@ -278,6 +278,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
     };
   }, []);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(categories[0]?.id || "");
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -481,11 +482,86 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
       {/* Only render the share button once isLoaded is true */}
       {isLoaded && <ShareFloating />}
 
+      {/* Sidebar Overlay */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSidebarOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+            />
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed left-0 top-0 bottom-0 w-[300px] bg-white dark:bg-background-dark z-[70] shadow-2xl flex flex-col p-8"
+            >
+              <div className="flex items-center justify-between mb-12">
+                <div className="text-xl font-extrabold tracking-tight text-charcoal dark:text-white">
+                  <span className="md:hidden">TPRC</span>
+                  <span className="hidden md:inline">TPR</span>
+                </div>
+                <button
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <nav className="flex flex-col gap-6">
+                {[
+                  { name: "Home", href: "#home" },
+                  { name: "About", href: "#about" },
+                  { name: "Major Clients", href: "#clients" },
+                  { name: "Projects", href: "#projects" },
+                  { name: "Products", href: "#products" },
+                  { name: "Contact Us", href: "#contact" },
+                ].map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="text-lg font-semibold text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="mt-auto pt-8 border-t border-gray-100 dark:border-gray-800">
+                <p className="text-sm text-gray-500">
+                  © {new Date().getFullYear()} <span className="md:hidden">TPRC</span><span className="hidden md:inline">TPR Constructions</span>
+                </p>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       <header className="sticky top-0 z-50 w-full border-b border-gray-200/50 dark:border-gray-800/50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md transition-[background-color,backdrop-filter,border-color] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="lg:hidden p-2 -ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors group"
+              aria-label="Toggle Navigation"
+            >
+              <div className="w-6 h-5 flex flex-col justify-between items-start">
+                <span className="w-6 h-0.5 bg-charcoal dark:bg-white rounded-full transition-all group-hover:w-4" />
+                <span className="w-4 h-0.5 bg-charcoal dark:bg-white rounded-full transition-all group-hover:w-6" />
+                <span className="w-5 h-0.5 bg-charcoal dark:bg-white rounded-full transition-all group-hover:w-3" />
+              </div>
+            </button>
             <div className="text-lg md:text-xl font-extrabold tracking-tight text-charcoal dark:text-white leading-none">
-              TP RAJU{" "}
+              <span className="md:hidden">TPRC</span>
+              <span className="hidden md:inline">TPR</span>{" "}
               <span className="hidden sm:inline font-normal text-gray-500">Constructions</span>
             </div>
           </div>
@@ -727,7 +803,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             </motion.div>
             <div className="flex flex-col gap-6">
               <span className="text-primary premium-label">
-                About TP Raju Constructions
+                About TPR Constructions
               </span>
               <AnimatedContainer el="h2" className="text-3xl md:text-5xl premium-heading">
                 <AnimatedWord>Building</AnimatedWord>{" "}
@@ -740,7 +816,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               <AnimatedText 
                 el="p"
                 className="text-lg premium-body"
-                text="TP Raju Constructions is a trusted name in scaffolding rental and industrial engineering services, delivering safe and reliable solutions for refineries, chemical plants, power plants and heavy industries across India."
+                text="TPR Constructions is a trusted name in scaffolding rental and industrial engineering services, delivering safe and reliable solutions for refineries, chemical plants, power plants and heavy industries across India."
               />
               <AnimatedText 
                 el="p"
@@ -1034,7 +1110,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
               Certifications &amp; Industry Recognition
             </h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:py-2">
-              Over the years, TP Raju Engineering Contractor has received
+              Over the years, TPR Constructions has received
               multiple recognitions for safety, quality workmanship, and
               engineering excellence.
             </p>
@@ -1088,7 +1164,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
               <p className="italic premium-body mb-6">
                 <span className="text-primary font-serif text-lg">&quot; </span>
-                Their commitment to safety is unparalleled. In our refinery expansion, TP Raju Engineering completed 20,000 man-hours without a single incident.
+                Their commitment to safety is unparalleled. In our refinery expansion, TPR Constructions completed 20,000 man-hours without a single incident.
                 <span className="text-primary font-serif text-lg">&quot;</span>
               </p>
               <div>
@@ -1217,7 +1293,9 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-3">
                 <h2 className="text-xl font-extrabold tracking-tight text-white">
-                  TP RAJU <span className="hidden sm:inline font-normal text-gray-500 text-sm">Constructions</span>
+                  <span className="md:hidden">TPRC</span>
+                  <span className="hidden md:inline">TPR</span>{" "}
+                  <span className="hidden sm:inline font-normal text-gray-500 text-sm">Constructions</span>
                 </h2>
               </div>
               <p className="text-sm premium-body">
@@ -1263,31 +1341,11 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 Services
               </h4>
               <ul className="flex flex-col gap-4 text-sm">
-                <li>
-                  <a className="hover:text-primary transition-colors" href="#">
-                    Scaffolding Rental
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:text-primary transition-colors" href="#">
-                    Erection Services
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:text-primary transition-colors" href="#">
-                    Mechanical Work
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:text-primary transition-colors" href="#">
-                    Thermal Insulation
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:text-primary transition-colors" href="#">
-                    Steel Fabrication
-                  </a>
-                </li>
+                <li>Scaffolding Rental</li>
+                <li>Erection Services</li>
+                <li>Mechanical Work</li>
+                <li>Thermal Insulation</li>
+                <li>Steel Fabrication</li>
               </ul>
             </div>
             <div>
@@ -1295,8 +1353,8 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                 Contact Us
               </h4>
               <ul className="flex flex-col gap-6 text-sm">
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
+                <li className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0">
                     location_on
                   </span>
                   <div className="flex flex-col gap-1">
@@ -1305,16 +1363,16 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <span>Ernakulam 682302</span>
                   </div>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
+                <li className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0">
                     mail
                   </span>
                   <a href="mailto:tprconstructions2020@gmail.com" className="hover:text-white transition-colors break-all">
                     tprconstructions2020@gmail.com
                   </a>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">
+                <li className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary shrink-0">
                     phone
                   </span>
                   <div className="flex flex-col gap-1">
@@ -1322,7 +1380,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     <a href="tel:+919744170465" className="hover:text-white transition-colors">+91 9744170465</a>
                   </div>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-center gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -1333,7 +1391,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-primary shrink-0 mt-0.5 w-6 h-6"
+                    className="text-primary shrink-0 w-6 h-6"
                   >
                     <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
@@ -1348,7 +1406,7 @@ export function LandingPage({ clients, projects, gallery, products }: LandingPag
           </div>
           <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-xs">
-              © 2023 TP Raju Constructions. All rights reserved.
+              © 2023 <span className="md:hidden">TPRC</span><span className="hidden md:inline">TPR Constructions</span>. All rights reserved.
             </p>
             <div className="flex items-center gap-8">
               <a className="text-xs hover:text-white transition-colors" href="#">
