@@ -758,7 +758,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-charcoal dark:text-white">
-                      500+
+                      28+
                     </p>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                       Projects
@@ -838,7 +838,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">500+</h4>
+                  <h4 className="text-4xl font-bold text-primary mb-2">28+</h4>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Projects Completed
                   </p>
@@ -894,7 +894,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                           .quality(80)
                           .url()}
                         alt={client.name}
-                        className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all"
+                        className="h-12 w-auto object-contain  group-hover:grayscale-0 transition-all"
                       />
                       <p className="font-bold text-sm text-center">{client.name}</p>
                     </div>
@@ -929,7 +929,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                   className="project-card-wrapper sticky origin-top w-full max-w-4xl mx-auto px-2 md:px-0"
                   style={{ top: '80px', zIndex: index + 1 }}
                 >
-                  <div className="project-card-inner group relative overflow-hidden rounded-[2rem] shadow-[0_-8px_30px_rgba(0,0,0,0.12)] border border-gray-100/50 dark:border-gray-700/50 aspect-[16/9] md:aspect-[16/9] bg-white dark:bg-zinc-800 origin-top">
+                  <div className="project-card-inner group relative overflow-hidden rounded-[2rem] shadow-[0_-8px_30px_rgba(0,0,0,0.12)]  aspect-[16/9] md:aspect-[16/9] bg-white dark:bg-zinc-800 origin-top">
                     <div className="absolute inset-0 bg-black pointer-events-none z-30 tint-overlay" style={{ opacity: 0 }} />
                     <div className="absolute inset-0 bg-charcoal/40 group-hover:bg-charcoal/20 transition-[background-color,opacity] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] z-10" />
                     <div
@@ -940,9 +940,9 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                     <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-charcoal/60 to-transparent z-10 pointer-events-none" />
 
                     <div className="absolute bottom-0 left-0 p-8 md:p-12 z-20 w-full bg-gradient-to-t from-charcoal/90 to-transparent">
-                      <span className="bg-primary text-charcoal px-5 py-1.5 rounded-full text-xs font-bold tracking-wide mb-4 inline-block shadow-lg">
+                      {/* <span className="bg-primary text-charcoal px-5 py-1.5 rounded-full text-xs font-bold tracking-wide mb-4 inline-block shadow-lg">
                         {project.category}
-                      </span>
+                      </span> */}
                       <AnimatedText 
                         el="h3"
                         text={project.title}
