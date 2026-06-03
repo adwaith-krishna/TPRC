@@ -124,9 +124,12 @@ export function AwardsSection({ awards, onOpenCertificate }: AwardsSectionProps)
             <p className="text-gray-500 text-[15px] leading-relaxed mb-8">
               Each certificate and award represents our hard work, dedication and the trust of our clients and partners.
             </p>
-            <button className="border border-[#1a1a1a] text-[#1a1a1a] rounded-lg text-sm font-bold px-7 py-3.5 hover:bg-[#1a1a1a] hover:text-white transition-all flex items-center gap-3 group">
-              View All Achievements <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
-            </button>
+            <div className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm tracking-wide">
+  All Achievements
+  <span className="material-symbols-outlined text-base">
+    arrow_forward
+  </span>
+</div>
           </div>
 
           <div className="lg:w-[70%] w-full relative overflow-hidden premium-scroll-mask">
