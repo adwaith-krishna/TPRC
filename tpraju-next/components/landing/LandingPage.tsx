@@ -663,6 +663,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                     >
                       {word}
                     </motion.span>
+                    
                   </span>
                   {i !== 6 && " "}
                 </Fragment>
