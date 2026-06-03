@@ -502,9 +502,12 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
               className="fixed left-0 top-0 bottom-0 w-[300px] bg-white dark:bg-background-dark z-[70] shadow-2xl flex flex-col p-8"
             >
               <div className="flex items-center justify-between mb-12">
-                <div className="text-xl font-extrabold tracking-tight text-charcoal dark:text-white">
-                  <span className="md:hidden">TPRC</span>
-                  <span className="hidden md:inline">TPR</span>
+                <div className="flex items-center gap-2">
+                  <img src="/TPRC.png" alt="TPRC Logo" className="h-8 w-auto object-contain" />
+                  <div className="text-xl font-extrabold tracking-tight text-charcoal dark:text-white">
+                    <span className="md:hidden">TPRC</span>
+                    <span className="hidden md:inline">TPR</span>
+                  </div>
                 </div>
                 <button
                   onClick={() => setIsSidebarOpen(false)}
@@ -560,10 +563,13 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                 <span className="w-5 h-0.5 bg-charcoal dark:bg-white rounded-full transition-all group-hover:w-3" />
               </div>
             </button>
-            <div className="text-lg md:text-xl font-extrabold tracking-tight text-charcoal dark:text-white leading-none">
-              <span className="md:hidden">TPRC</span>
-              <span className="hidden md:inline">TPR</span>{" "}
-              <span className="hidden sm:inline font-normal text-gray-500">Constructions</span>
+            <div className="flex items-center gap-2">
+              <img src="/TPRC.png" alt="TPRC Logo" className="h-8 md:h-10 w-auto object-contain" />
+              <div className="text-lg md:text-xl font-extrabold tracking-tight text-charcoal dark:text-white leading-none">
+                <span className="md:hidden">TPRC</span>
+                <span className="hidden md:inline">TPR</span>{" "}
+                <span className="hidden sm:inline font-normal text-gray-500">Constructions</span>
+              </div>
             </div>
           </div>
           <nav className="hidden lg:flex items-center gap-10">
@@ -979,13 +985,13 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                     <button
                       key={category.id}
                       onClick={() => setActiveTab(category.id)}
-                      className={`group relative w-[calc(50%-0.25rem)] md:w-auto flex items-center justify-center gap-1.5 px-2 sm:px-5 md:px-7 py-2.5 md:py-2.5 rounded-full transition-all duration-500 font-sans font-medium text-sm md:text-base whitespace-nowrap ${isActive
-                        ? 'bg-white text-charcoal shadow-sm border-2 border-black'
-                        : 'text-white/50 hover:text-white/80'
+                      className={`group relative w-[calc(50%-0.25rem)] md:w-auto flex items-center justify-center gap-1.5 px-2 sm:px-5 md:px-7 py-2.5 rounded-full transition-all duration-300 ease-out font-sans font-medium text-sm md:text-base whitespace-nowrap ${isActive
+                        ? 'bg-white text-charcoal shadow-md'
+                        : 'text-white/60 hover:text-white hover:bg-white/10 active:scale-95'
                         }`}
                     >
                       <span>{category.name}</span>
-                      <span className={`text-[9px] md:text-[10px] font-bold self-start mt-0.5 ${isActive ? 'text-charcoal/40' : 'text-white/20'}`}>
+                      <span className={`text-[9px] md:text-[10px] font-bold self-start mt-0.5 transition-colors duration-300 ${isActive ? 'text-charcoal/40' : 'text-white/30 group-hover:text-white/60'}`}>
                         {category.number}
                       </span>
                     </button>
@@ -996,74 +1002,85 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
 
             {/* <!-- Product Cards Carousel (Below) - Conditional Auto Scroll --> */}
             <div className="w-full relative overflow-hidden premium-scroll-mask flex items-center min-h-[400px]">
-              {(() => {
-                const activeCategory = categories.find(c => c.id === activeTab);
-                const products = activeCategory?.products || [];
-                const shouldScroll = products.length > 4;
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="w-full"
+                >
+                  {(() => {
+                    const activeCategory = categories.find(c => c.id === activeTab);
+                    const products = activeCategory?.products || [];
+                    const shouldScroll = products.length > 4;
 
-                if (!shouldScroll) {
-                  return (
-                    <div className="flex flex-wrap justify-center gap-8 w-full py-4">
-                      {products.map((product: any) => (
-                        <div
-                          key={product.id}
-                          className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col transition-all duration-300 hover:scale-[1.03] hover:shadow-xl relative"
-                        >
-                          <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
-                            <img
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              alt={product.name}
-                              src={product.image}
-                            />
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
-                            <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
-                          </div>
-                          <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
-                            <span className="text-primary font-bold text-[10px] tracking-wider uppercase">{product.tag}</span>
-                            <span className="material-symbols-outlined text-gray-300 text-sm">inventory_2</span>
-                          </div>
+                    if (!shouldScroll) {
+                      return (
+                        <div className="flex flex-wrap justify-center gap-8 w-full py-4">
+                          {products.map((product: any) => (
+                            <div
+                              key={product.id}
+                              className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col transition-all duration-300 hover:scale-[1.03] hover:shadow-xl relative"
+                            >
+                              <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
+                                <img
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  alt={product.name}
+                                  src={product.image}
+                                />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
+                                <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
+                              </div>
+                              <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
+                                <span className="text-primary font-bold text-[10px] tracking-wider uppercase">{product.tag}</span>
+                                <span className="material-symbols-outlined text-gray-300 text-sm">inventory_2</span>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  );
-                }
+                      );
+                    }
 
-                return (
-                  <div
-                    className="flex animate-scroll-reverse hover:pause gap-8 w-max"
-                    style={{ animationDuration: `${Math.max(products.length * 6, 12)}s` }}
-                  >
-                    {[1, 2].map((loop) => (
-                      <div key={loop} className="flex gap-8">
-                        {products.map((product: any) => (
-                          <div
-                            key={`${loop}-${product.id}`}
-                            className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col shrink-0 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:z-20 relative"
-                          >
-                            <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
-                              <img
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                alt={product.name}
-                                src={product.image}
-                              />
-                            </div>
-                            <div className="flex-1">
-                              <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
-                              <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
-                            </div>
-                            <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
-                              <span className="text-primary font-bold text-[10px] tracking-wider uppercase">{product.tag}</span>
-                              <span className="material-symbols-outlined text-gray-300 text-sm">inventory_2</span>
-                            </div>
+                    return (
+                      <div
+                        className="flex animate-scroll-reverse hover:pause gap-8 w-max"
+                        style={{ animationDuration: `${Math.max(products.length * 6, 12)}s` }}
+                      >
+                        {[1, 2].map((loop) => (
+                          <div key={loop} className="flex gap-8">
+                            {products.map((product: any) => (
+                              <div
+                                key={`${loop}-${product.id}`}
+                                className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col shrink-0 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:z-20 relative"
+                              >
+                                <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
+                                  <img
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    alt={product.name}
+                                    src={product.image}
+                                  />
+                                </div>
+                                <div className="flex-1">
+                                  <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
+                                  <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
+                                </div>
+                                <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
+                                  <span className="text-primary font-bold text-[10px] tracking-wider uppercase">{product.tag}</span>
+                                  <span className="material-symbols-outlined text-gray-300 text-sm">inventory_2</span>
+                                </div>
+                              </div>
+                            ))}
                           </div>
                         ))}
                       </div>
-                    ))}
-                  </div>
-                );
-              })()}
+                    );
+                  })()}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </section>
