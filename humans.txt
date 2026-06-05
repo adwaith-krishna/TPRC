@@ -1,5 +1,7 @@
 /* TEAM */
 
+Developed by: Zedbe
+
 Developer: Adwaith Krishna
 Github: https://github.com/adwaith-krishna
 LinkedIn: https://www.linkedin.com/in/adwaithk/
