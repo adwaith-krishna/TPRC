@@ -1,6 +1,6 @@
 /* TEAM */
 
-Developed by: Zedbe
+Developed by: ZedBe
 Email: hellozedbe@gmail.com
 
 Developer: Adwaith Krishna
