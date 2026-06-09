@@ -85,28 +85,28 @@ export function AwardsSection({ awards, onOpenCertificate }: AwardsSectionProps)
         <div className="flex items-start gap-4 lg:px-6 first:pl-0 last:pr-0">
           <span className="material-symbols-outlined text-4xl text-gray-400">verified_user</span>
           <div className="flex flex-col">
-            <h4 className="text-sm font-bold text-[#1a1a1a] mb-1">Authentic & Verified</h4>
+            <h3 className="text-sm font-bold text-[#1a1a1a] mb-1">Authentic & Verified</h3>
             <p className="text-xs text-gray-500 leading-relaxed">All achievements are verified and authentic</p>
           </div>
         </div>
         <div className="flex items-start gap-4 lg:px-6 first:pl-0 last:pr-0">
           <span className="material-symbols-outlined text-4xl text-gray-400">workspace_premium</span>
           <div className="flex flex-col">
-            <h4 className="text-sm font-bold text-[#1a1a1a] mb-1">Industry Recognized</h4>
+            <h3 className="text-sm font-bold text-[#1a1a1a] mb-1">Industry Recognized</h3>
             <p className="text-xs text-gray-500 leading-relaxed">Recognized by leading organizations</p>
           </div>
         </div>
         <div className="flex items-start gap-4 lg:px-6 first:pl-0 last:pr-0">
           <span className="material-symbols-outlined text-4xl text-gray-400">group</span>
           <div className="flex flex-col">
-            <h4 className="text-sm font-bold text-[#1a1a1a] mb-1">Trusted by Clients</h4>
+            <h3 className="text-sm font-bold text-[#1a1a1a] mb-1">Trusted by Clients</h3>
             <p className="text-xs text-gray-500 leading-relaxed">Building trust through proven excellence</p>
           </div>
         </div>
         <div className="flex items-start gap-4 lg:px-6 first:pl-0 last:pr-0">
           <span className="material-symbols-outlined text-4xl text-gray-400">trending_up</span>
           <div className="flex flex-col">
-            <h4 className="text-sm font-bold text-[#1a1a1a] mb-1">Commitment to Quality</h4>
+            <h3 className="text-sm font-bold text-[#1a1a1a] mb-1">Commitment to Quality</h3>
             <p className="text-xs text-gray-500 leading-relaxed">Continuously raising the bar for better tomorrow</p>
           </div>
         </div>
@@ -142,7 +142,7 @@ export function AwardsSection({ awards, onOpenCertificate }: AwardsSectionProps)
                   {displayAwards.map((award) => {
                     const isGold = award.badgeType === "gold" || award.badgeText?.toLowerCase() === "winner" || award.badgeText?.toLowerCase() === "top performer";
                     const badgeBg = isGold ? "bg-[var(--color-award-gold)]" : "bg-blue-600";
-                    const imageUrl = (award as any).imageUrl || (award.image ? urlFor(award.image).url() : "");
+                    const imageUrl = (award as Award & { imageUrl?: string }).imageUrl || (award.image ? urlFor(award.image).url() : "");
 
                     return (
                       <div key={`${loop}-${award._id}`} className="w-[280px] md:w-[320px] bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 p-5 flex flex-col shrink-0">

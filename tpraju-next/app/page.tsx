@@ -2,6 +2,8 @@ import { LandingPage } from "@/components/landing/LandingPage";
 import { client } from "@/lib/sanity.client";
 import { Project, Product, GalleryItem, Client, Award } from "@/types/sanity";
 
+export const revalidate = 3600;
+
 export default async function Home() {
   const [clients, projects, gallery, products, awards] = await Promise.all([
     client.fetch(`*[_type == "majorClient"]{_id, name, logo}`),

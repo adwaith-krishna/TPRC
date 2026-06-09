@@ -240,6 +240,14 @@ interface TransformedGalleryItem {
   title: string;
 }
 
+interface TransformedProduct {
+  id: string;
+  name: string;
+  subtitle?: string;
+  tag?: string;
+  image: string;
+}
+
 interface LandingPageProps {
   clients: Client[];
   projects: Project[];
@@ -833,25 +841,25 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
               />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-6">
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">8+</h4>
+                  <h3 className="text-4xl font-bold text-primary mb-2">8+</h3>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Years of Experience
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">28+</h4>
+                  <h3 className="text-4xl font-bold text-primary mb-2">28+</h3>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Projects Completed
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">10+</h4>
+                  <h3 className="text-4xl font-bold text-primary mb-2">10+</h3>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     Satisfied Clients
                   </p>
                 </div>
                 <div className="bg-background-light dark:bg-background-dark p-6 rounded-xl">
-                  <h4 className="text-4xl font-bold text-primary mb-2">ISO</h4>
+                  <h3 className="text-4xl font-bold text-primary mb-2">ISO</h3>
                   <p className="text-sm uppercase text-gray-500 font-bold">
                     9001:2015 Certified
                   </p>
@@ -906,7 +914,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
           </div>
         </section>
 
-        <div id="projects" className="relative pt-24 pb-0 bg-white dark:bg-zinc-900/50 no-reveal">
+        <section id="projects" className="relative pt-24 pb-0 bg-white dark:bg-zinc-900/50 no-reveal">
           <div className="px-6 md:px-16 lg:px-24 mb-16 shrink-0 text-center">
             <AnimatedText 
               el="h2"
@@ -960,7 +968,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
               );
             })}
           </div>
-        </div>
+        </section>
 
 
 
@@ -1020,7 +1028,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                     if (!shouldScroll) {
                       return (
                         <div className="flex flex-wrap justify-center gap-8 w-full py-4">
-                          {products.map((product: any) => (
+                          {products.map((product: TransformedProduct) => (
                             <div
                               key={product.id}
                               className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col transition-all duration-300 hover:scale-[1.03] hover:shadow-xl relative"
@@ -1033,7 +1041,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                                 />
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
+                                <h3 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h3>
                                 <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
                               </div>
                               <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
@@ -1053,7 +1061,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                       >
                         {[1, 2].map((loop) => (
                           <div key={loop} className="flex gap-8">
-                            {products.map((product: any) => (
+                            {products.map((product: TransformedProduct) => (
                               <div
                                 key={`${loop}-${product.id}`}
                                 className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col shrink-0 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:z-20 relative"
@@ -1066,7 +1074,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                                   />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h4>
+                                  <h3 className="font-bold text-charcoal dark:text-white text-base leading-snug mb-1">{product.name}</h3>
                                   <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.subtitle}</p>
                                 </div>
                                 <div className="mt-auto pt-4 border-t border-gray-50 dark:border-zinc-700 flex items-center justify-between">
@@ -1113,7 +1121,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                   <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] pointer-events-none" />
                 </div>
               ) : (
-                <GalleryImage key={item.id} src={item.src} className={item.gridClass} />
+                <GalleryImage key={item.id} src={item.src} alt={item.title} className={item.gridClass} />
               )
             )}
           </div>
@@ -1311,11 +1319,11 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-3">
-                <h2 className="text-xl font-extrabold tracking-tight text-white">
+                <div className="text-xl font-extrabold tracking-tight text-white">
                   <span className="md:hidden">TPRC</span>
                   <span className="hidden md:inline">TPR</span>{" "}
                   <span className="hidden sm:inline font-normal text-gray-500 text-sm">Constructions</span>
-                </h2>
+                </div>
               </div>
               <p className="text-sm premium-body">
                 Providing high-end scaffolding and engineering services across
@@ -1428,10 +1436,10 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
               © 2023 <span className="md:hidden">TPRC</span><span className="hidden md:inline">TPR Constructions</span>. All rights reserved.
             </p>
             <div className="flex items-center gap-8">
-              <a className="text-xs hover:text-white transition-colors" href="#">
+              <a className="text-xs hover:text-white transition-colors" href="#" rel="nofollow">
                 Privacy Policy
               </a>
-              <a className="text-xs hover:text-white transition-colors" href="#">
+              <a className="text-xs hover:text-white transition-colors" href="#" rel="nofollow">
                 Terms of Service
               </a>
               <button
@@ -1452,13 +1460,13 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
   );
 }
 
-function GalleryImage({ src, className = "" }: { src: string; className?: string }) {
+function GalleryImage({ src, alt = "TP Raju Constructions Worksite", className = "" }: { src: string; alt?: string; className?: string }) {
   return (
     <div className={`group relative overflow-hidden rounded-lg transition-all duration-500 hover:scale-105 ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
-        alt=""
+        alt={alt}
         loading="lazy"
         className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06] block"
       />
@@ -1488,7 +1496,7 @@ function AchievementCard({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={certSrc}
-          alt=""
+          alt={title}
           className="certificate-img w-full h-[260px] object-cover cursor-pointer"
           onClick={() => onOpen(certSrc)}
         />

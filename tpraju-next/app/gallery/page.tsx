@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Project Gallery | TP Raju Constructions",
+  description: "Browse photos and videos demonstrating our scaffolding installations, mechanical fabrications, and industrial engineering worksites across India.",
+  alternates: {
+    canonical: "/gallery",
+  },
+};
 
 export default function GalleryPage() {
   return (
