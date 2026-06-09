@@ -93,6 +93,7 @@ export const AnimatedContainer = ({
   stagger?: number;
   trigger?: "mount" | "inView";
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const MotionWrapper = motion(Wrapper as any) as any;
   return (
     <MotionWrapper

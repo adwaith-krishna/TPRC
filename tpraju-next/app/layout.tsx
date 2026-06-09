@@ -13,11 +13,18 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
+export const viewport = {
+  themeColor: "#FFB800",
+};
+
 export const metadata: Metadata = {
   title: "TP Raju Constructions | Scaffolding Rental & Industrial Engineering",
   description:
     "Premium scaffolding rentals, mechanical fabrication, and industrial engineering services in India since 2008. Safe, reliable, and ISO 9001:2015 certified.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://tpraju.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "TP Raju Constructions | Scaffolding Rental & Industrial Engineering",
     description: "Premium scaffolding rentals, mechanical fabrication, and industrial engineering services in India since 2008.",
@@ -42,13 +49,15 @@ export const metadata: Metadata = {
   },
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tpraju.com";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ConstructionBusiness",
   "name": "TP Raju Constructions",
-  "image": "https://tpraju.com/left.png",
-  "@id": "https://tpraju.com/#organization",
-  "url": "https://tpraju.com",
+  "image": `${siteUrl}/left.png`,
+  "@id": `${siteUrl}/#organization`,
+  "url": siteUrl,
   "telephone": "+919447590954",
   "email": "tprconstructions2020@gmail.com",
   "address": {
@@ -79,7 +88,9 @@ const jsonLd = {
   },
   "sameAs": [
     "https://www.instagram.com/tprconstructions/?hl=en"
-  ]
+  ],
+  "priceRange": "$$",
+  "logo": `${siteUrl}/TPRC.png`
 };
 
 export default function RootLayout({
