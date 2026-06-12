@@ -8,6 +8,8 @@ import {
   Fragment,
 } from "react";
 import { CertificateModal } from "./CertificateModal";
+import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
+import { TermsOfServiceModal } from "./TermsOfServiceModal";
 import { ShareFloating } from "./ShareFloating";
 import { AwardsSection } from "./AwardsSection";
 
@@ -291,6 +293,8 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
   const [activeTab, setActiveTab] = useState(categories[0]?.id || "");
   const [certSrc, setCertSrc] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const pausedSlidersRef = useRef(new Set<string>());
   const sliderStateRef = useRef<Record<string, number>>({ cat1: 0, cat2: 0 });
@@ -1436,12 +1440,18 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
               © 2023 <span className="md:hidden">TPRC</span><span className="hidden md:inline">TPR Constructions</span>. All rights reserved.
             </p>
             <div className="flex items-center gap-8">
-              <a className="text-xs hover:text-white transition-colors" href="#" rel="nofollow">
+              <button 
+                onClick={(e) => { e.preventDefault(); setIsPrivacyPolicyOpen(true); }}
+                className="text-xs hover:text-white transition-colors cursor-pointer"
+              >
                 Privacy Policy
-              </a>
-              <a className="text-xs hover:text-white transition-colors" href="#" rel="nofollow">
+              </button>
+              <button 
+                onClick={(e) => { e.preventDefault(); setIsTermsOpen(true); }}
+                className="text-xs hover:text-white transition-colors cursor-pointer"
+              >
                 Terms of Service
-              </a>
+              </button>
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-primary hover:text-charcoal transition-colors border border-white/10 hover:border-primary text-white"
@@ -1456,6 +1466,8 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
       </footer>
 
       <CertificateModal src={certSrc} onClose={closeCertificate} />
+      <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
+      <TermsOfServiceModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
     </>
   );
 }
