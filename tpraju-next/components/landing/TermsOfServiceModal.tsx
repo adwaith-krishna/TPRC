@@ -65,19 +65,19 @@ export function TermsOfServiceModal({ isOpen, onClose }: Props) {
                 
                 <section>
                   <h3 className="text-lg font-bold text-charcoal dark:text-white mb-2">2. Use License</h3>
-                  <p>Permission is granted to temporarily download one copy of the materials (information or software) on TPR Constructions' website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+                  <p>Permission is granted to temporarily download one copy of the materials (information or software) on TPR Constructions&apos; website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
                   <ul className="list-disc pl-5 mt-2 space-y-1">
                     <li>modify or copy the materials;</li>
                     <li>use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
                     <li>attempt to decompile or reverse engineer any software contained on our website;</li>
                     <li>remove any copyright or other proprietary notations from the materials; or</li>
-                    <li>transfer the materials to another person or "mirror" the materials on any other server.</li>
+                    <li>transfer the materials to another person or &quot;mirror&quot; the materials on any other server.</li>
                   </ul>
                 </section>
 
                 <section>
                   <h3 className="text-lg font-bold text-charcoal dark:text-white mb-2">3. Disclaimer</h3>
-                  <p>The materials on TPR Constructions' website are provided on an 'as is' basis. TPR Constructions makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+                  <p>The materials on TPR Constructions&apos; website are provided on an &apos;as is&apos; basis. TPR Constructions makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
                 </section>
 
                 <section>

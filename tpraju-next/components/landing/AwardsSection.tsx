@@ -2,6 +2,7 @@
 
 import { Award } from "@/types/sanity";
 import { urlFor } from "@/lib/sanity.image";
+import Image from "next/image";
 
 const CERT1 = "https://img.freepik.com/free-vector/certificate-template-design_53876-59034.jpg";
 const CERT2 = "https://img.freepik.com/free-vector/certificate-template-design_53876-59037.jpg";
@@ -68,9 +69,9 @@ export function AwardsSection({ awards, onOpenCertificate }: AwardsSectionProps)
       {/* Title Section */}
       <div className="text-center mb-16 flex flex-col items-center">
         <div className="flex items-center gap-6 mb-4">
-          <img src="/left.png" alt="" className="w-12 h-auto opacity-80" />
+          <Image src="/left.png" alt="Wreath decoration left" width={48} height={48} className="w-12 h-auto opacity-80" />
           <span className="premium-label tracking-[0.2em] font-bold text-gray-800">OUR ACHIEVEMENTS</span>
-          <img src="/right.png" alt="" className="w-12 h-auto opacity-80" />
+          <Image src="/right.png" alt="Wreath decoration right" width={48} height={48} className="w-12 h-auto opacity-80" />
         </div>
         <h2 className="text-4xl md:text-5xl premium-heading text-[#1a1a1a] mb-6">
           Recognition That <br /> Inspires <span className="text-[var(--color-award-gold)] italic">Excellence</span>
@@ -160,7 +161,7 @@ export function AwardsSection({ awards, onOpenCertificate }: AwardsSectionProps)
                             </span>
                           )}
                           {imageUrl && (
-                            <img src={imageUrl} className="w-full h-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-500" alt={award.title} />
+                            <Image src={imageUrl} fill sizes="(max-width: 768px) 100vw, 320px" className="w-full h-full object-contain mix-blend-multiply hover:scale-105 transition-transform duration-500" alt={award.title} />
                           )}
                         </div>
                         <h4 className="font-bold text-[#1a1a1a] text-lg leading-snug mb-1 whitespace-normal">{award.title}</h4>

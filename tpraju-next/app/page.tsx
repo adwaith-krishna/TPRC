@@ -1,11 +1,11 @@
 import { LandingPage } from "@/components/landing/LandingPage";
 import { client } from "@/lib/sanity.client";
-import { Project, Product, GalleryItem, Client, Award } from "@/types/sanity";
+import { Project, Product, GalleryItem, Client, Award, ClientFeedback } from "@/types/sanity";
 
 export const revalidate = 3600;
 
 export default async function Home() {
-  const [clients, projects, gallery, products, awards] = await Promise.all([
+  const [clients, projects, gallery, products, awards, testimonials] = await Promise.all([
     client.fetch(`*[_type == "majorClient"]{_id, name, logo}`),
     client.fetch(`*[_type == "project"] | order(_createdAt desc) {_id, title, category, description, image}`), 
     client.fetch(`*[_type == "galleryItem"] | order(_createdAt desc)`),
@@ -18,8 +18,9 @@ export default async function Home() {
   tag,
   image
 } | order(categoryNumber asc)`),
-    client.fetch(`*[_type == "award"] | order(year desc, _createdAt desc) {_id, title, issuer, year, badgeText, badgeType, image, isCertificate}`)
-    ]) as [Client[], Project[], GalleryItem[], Product[], Award[]];
+    client.fetch(`*[_type == "award"] | order(year desc, _createdAt desc) {_id, title, issuer, year, badgeText, badgeType, image, isCertificate}`),
+    client.fetch(`*[_type == "clientFeedback"] | order(_createdAt desc) {_id, feedback, name, designation, company}`)
+    ]) as [Client[], Project[], GalleryItem[], Product[], Award[], ClientFeedback[]];
 
   return (
     <LandingPage 
@@ -28,6 +29,7 @@ export default async function Home() {
       gallery={gallery || []}
       products={products || []}
       awards={awards || []}
+      testimonials={testimonials || []}
     />
   );
 }

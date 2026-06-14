@@ -19,8 +19,9 @@ import Lenis from "lenis";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 import { TPRCLoader } from "./LoadingScreen";
-import { Project, Product, GalleryItem, Client, Award } from "@/types/sanity";
+import { Project, Product, GalleryItem, Client, Award, ClientFeedback } from "@/types/sanity";
 import { AnimatedText, AnimatedContainer, AnimatedWord } from "./AnimatedText";
+import Image from "next/image";
 
 const HERO_BG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuCWASYnz6kODAfg1YQ7cNgUaCc6Qf64cMUfUHa-QNDn1FrMKLUdQdl3YTQHI8hCfUECTGZghv4-X3PzmTWa1V3QJOSi4ifkXFl9DBLxqsCjjWkGdPK2iQIFEFWmJ_Be1ygq8HgEgr-tk8-CPTuhtc4DjiKfL4OnIogfAvI4svCNTlMf5nNGIFUPaIUwtjhC0vjyHufhH0MTJwT3Z9r8iuUVLhjnrFHeJNJ3rsijo4Z820RAIbo4bSFdhdM--vU7TxWWDxHSErUfIfM7";
@@ -250,15 +251,40 @@ interface TransformedProduct {
   image: string;
 }
 
+const DEFAULT_TESTIMONIALS = [
+  {
+    _id: "default-1",
+    feedback: "Their commitment to safety is unparalleled. In our refinery expansion, TPR Constructions completed 20,000 man-hours without a single incident.",
+    name: "Ramesh Kumar",
+    designation: "Safety Head",
+    company: "HPCL"
+  },
+  {
+    _id: "default-2",
+    feedback: "Excellent material quality and prompt delivery. Their fabrication work for our chemical reactor housing was precise and handled with great care.",
+    name: "S. Venkatesh",
+    designation: "Project Manager",
+    company: "L&T"
+  },
+  {
+    _id: "default-3",
+    feedback: "The rental service is highly efficient. They provided us with specialized cantilever scaffolding that solved a major accessibility challenge.",
+    name: "David Miller",
+    designation: "Site Engineer",
+    company: "Petrofac"
+  }
+];
+
 interface LandingPageProps {
   clients: Client[];
   projects: Project[];
   gallery: GalleryItem[];
   products: Product[];
   awards: Award[];
+  testimonials?: ClientFeedback[];
 }
 
-export function LandingPage({ clients, projects, gallery, products, awards }: LandingPageProps) {
+export function LandingPage({ clients, projects, gallery, products, awards, testimonials = [] }: LandingPageProps) {
   // Transform Sanity products into categories
   const categories = transformProductsToCategories(products);
 
@@ -515,7 +541,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
             >
               <div className="flex items-center justify-between mb-12">
                 <div className="flex items-center gap-2">
-                  <img src="/TPRC.png" alt="TPRC Logo" className="h-8 w-auto object-contain" />
+                  <Image src="/TPRC.png" alt="TPRC Logo" width={120} height={40} className="h-8 w-auto object-contain" />
                   <div className="text-xl font-extrabold tracking-tight text-charcoal dark:text-white">
                     <span className="md:hidden">TPRC</span>
                     <span className="hidden md:inline">TPR</span>
@@ -576,7 +602,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
               </div>
             </button>
             <div className="flex items-center gap-2">
-              <img src="/TPRC.png" alt="TPRC Logo" className="h-8 md:h-10 w-auto object-contain" />
+              <Image src="/TPRC.png" alt="TPRC Logo" width={120} height={40} className="h-8 md:h-10 w-auto object-contain" />
               <div className="text-lg md:text-xl font-extrabold tracking-tight text-charcoal dark:text-white leading-none">
                 <span className="md:hidden">TPRC</span>
                 <span className="hidden md:inline">TPR</span>{" "}
@@ -899,7 +925,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                       key={`${loop}-${client._id}`}
                       className="group p-4 md:p-8 rounded-xl flex flex-col items-center justify-center gap-2 transition-all flex-shrink-0 w-32 md:w-40"
                     >
-                      <img
+                      <Image
                         src={urlFor(client.logo)
                           .height(48)
                           .fit('max')
@@ -907,6 +933,8 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                           .quality(80)
                           .url()}
                         alt={client.name}
+                        width={160}
+                        height={48}
                         className="h-12 w-auto object-contain  group-hover:grayscale-0 transition-all"
                       />
                       <p className="font-bold text-sm text-center">{client.name}</p>
@@ -1037,11 +1065,12 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                               key={product.id}
                               className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col transition-all duration-300 hover:scale-[1.03] hover:shadow-xl relative"
                             >
-                              <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
-                                <img
+                              <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800 relative">
+                                <Image
                                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                   alt={product.name}
                                   src={product.image}
+                                  fill
                                 />
                               </div>
                               <div className="flex-1">
@@ -1070,11 +1099,12 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                                 key={`${loop}-${product.id}`}
                                 className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col shrink-0 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:z-20 relative"
                               >
-                                <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800">
-                                  <img
+                                <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800 relative">
+                                  <Image
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     alt={product.name}
                                     src={product.image}
+                                    fill
                                   />
                                 </div>
                                 <div className="flex-1">
@@ -1121,8 +1151,10 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                     muted
                     loop
                     playsInline
+                    aria-label={item.title || "Scaffolding and industrial engineering worksite video"}
                   />
                   <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] pointer-events-none" />
+                  <span className="sr-only">{item.title || "Scaffolding and industrial engineering worksite video"}</span>
                 </div>
               ) : (
                 <GalleryImage key={item.id} src={item.src} alt={item.title} className={item.gridClass} />
@@ -1191,43 +1223,19 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-
-            <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
-              <p className="italic premium-body mb-6">
-                <span className="text-primary font-serif text-lg">&quot; </span>
-                Their commitment to safety is unparalleled. In our refinery expansion, TPR Constructions completed 20,000 man-hours without a single incident.
-                <span className="text-primary font-serif text-lg">&quot;</span>
-              </p>
-              <div>
-                <p className="font-serif">Ramesh Kumar</p>
-                <p className="premium-label text-gray-400">Safety Head, HPCL</p>
+            {(testimonials && testimonials.length > 0 ? testimonials : DEFAULT_TESTIMONIALS).map((item) => (
+              <div key={item._id} className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
+                <p className="italic text-gray-600 dark:text-gray-300 mb-6">
+                  <span className="text-primary font-serif text-lg">&quot; </span>
+                  {item.feedback.length > 150 ? `${item.feedback.slice(0, 147)}...` : item.feedback}
+                  <span className="text-primary font-serif text-lg">&quot;</span>
+                </p>
+                <div>
+                  <p className="font-serif">{item.name}</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{item.designation}, {item.company}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
-              <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-serif text-lg">&quot; </span>
-                Excellent material quality and prompt delivery. Their fabrication work for our chemical reactor housing was precise and handled with great care.
-                <span className="text-primary font-serif text-lg">&quot;</span>
-              </p>
-              <div>
-                <p className="font-serif">S. Venkatesh</p>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Project Manager, L&amp;T</p>
-              </div>
-            </div>
-
-            <div className="bg-background-light dark:bg-background-dark p-8 rounded-2xl relative">
-              <p className="italic text-gray-600 dark:text-gray-300 mb-6">
-                <span className="text-primary font-serif text-lg">&quot; </span>
-                The rental service is highly efficient. They provided us with specialized cantilever scaffolding that solved a major accessibility challenge.
-                <span className="text-primary font-serif text-lg">&quot;</span>
-              </p>
-              <div>
-                <p className="font-serif">David Miller</p>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Site Engineer, Petrofac</p>
-              </div>
-            </div>
-
+            ))}
           </div>
         </section>
 
@@ -1346,7 +1354,7 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#home">
+                  <a className="hover:text-primary transition-colors" href="#about">
                     Our Services
                   </a>
                 </li>
@@ -1475,11 +1483,11 @@ export function LandingPage({ clients, projects, gallery, products, awards }: La
 function GalleryImage({ src, alt = "TP Raju Constructions Worksite", className = "" }: { src: string; alt?: string; className?: string }) {
   return (
     <div className={`group relative overflow-hidden rounded-lg transition-all duration-500 hover:scale-105 ${className}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={src}
         alt={alt}
-        loading="lazy"
+        fill
+        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
         className="w-full h-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.06] block"
       />
       <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] pointer-events-none" />
