@@ -49,3 +49,11 @@ export interface Award {
   isCertificate?: boolean;
 }
 
+export interface ClientFeedback {
+  _id: string;
+  feedback: string;
+  name: string;
+  designation: string;
+  company: string;
+}
+

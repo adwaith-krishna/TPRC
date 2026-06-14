@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   title: "TP Raju Constructions | Scaffolding Rental & Industrial Engineering",
   description:
     "Premium scaffolding rentals, mechanical fabrication, and industrial engineering services in India since 2008. Safe, reliable, and ISO 9001:2015 certified.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://tpraju.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://tprconstructions.in"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "TP Raju Constructions | Scaffolding Rental & Industrial Engineering",
     description: "Premium scaffolding rentals, mechanical fabrication, and industrial engineering services in India since 2008.",
-    url: "https://tpraju.com",
+    url: "https://tprconstructions.in",
     siteName: "TP Raju Constructions",
     images: [
       {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tpraju.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tprconstructions.in";
 
 const jsonLd = {
   "@context": "https://schema.org",

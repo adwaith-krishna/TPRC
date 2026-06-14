@@ -5,4 +5,4 @@ Disallow: /studio/
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://tpraju.com/sitemap.xml
+Sitemap: https://tprconstructions.in/sitemap.xml
