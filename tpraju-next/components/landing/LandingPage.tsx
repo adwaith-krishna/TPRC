@@ -1210,7 +1210,7 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
         <AwardsSection awards={awards} onOpenCertificate={openCertificate} />
 
         {/* <!-- Testimonials --> */}
-        <section className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
+        <section id="testimonials" className="px-6 md:px-16 lg:px-24 py-24 lg:py-32 bg-white dark:bg-zinc-900/50 rounded-2xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-3">Client Feedback</h2>
             {/* <!--  <div className="flex justify-center gap-1 text-primary">
@@ -1354,11 +1354,6 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#about">
-                    Our Services
-                  </a>
-                </li>
-                <li>
                   <a className="hover:text-primary transition-colors" href="#products">
                     Product Catalogue
                   </a>
@@ -1371,6 +1366,11 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
                 <li>
                   <a className="hover:text-primary transition-colors" href="#projects">
                     Latest Projects
+                  </a>
+                </li>
+                <li>
+                  <a className="hover:text-primary transition-colors" href="#testimonials">
+                    Client Feedback
                   </a>
                 </li>
               </ul>
