@@ -7,7 +7,7 @@ export default {
       name: 'feedback',
       type: 'text',
       title: 'Feedback / Quote',
-      validation: (Rule) => Rule.max(150).warning('Keep feedback below 150 characters for a clean UI layout.'),
+      validation: (Rule: any) => Rule.max(150).warning('Keep feedback below 150 characters for a clean UI layout.'),
     },
     {
       name: 'name',
