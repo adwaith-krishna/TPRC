@@ -1360,7 +1360,7 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
                 </li>
                 <li>
                   <a className="hover:text-primary transition-colors" href="#awards">
-                    Safety Standards
+                    Achievements
                   </a>
                 </li>
                 <li>
