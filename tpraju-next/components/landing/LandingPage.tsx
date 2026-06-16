@@ -1379,12 +1379,10 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
               <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">
                 Services
               </h4>
-              <ul className="flex flex-col gap-4 text-sm">
+             <ul className="flex flex-col gap-4 text-sm">
                 <li>Scaffolding Rental</li>
-                <li>Erection Services</li>
-                <li>Mechanical Work</li>
-                <li>Thermal Insulation</li>
-                <li>Steel Fabrication</li>
+                <li>Scaffolding Works</li>
+                <li>Scaffolding Materials</li>
               </ul>
             </div>
             <div>
