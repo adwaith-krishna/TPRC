@@ -1359,13 +1359,13 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#awards">
-                    Safety Standards
+                  <a className="hover:text-primary transition-colors" href="#projects">
+                    Latest Projects
                   </a>
                 </li>
                 <li>
-                  <a className="hover:text-primary transition-colors" href="#projects">
-                    Latest Projects
+                  <a className="hover:text-primary transition-colors" href="#awards">
+                    Achievements
                   </a>
                 </li>
                 <li>
