@@ -1016,7 +1016,7 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
             />
           </div>
 
-          <div className="flex flex-col items-center gap-16">
+          <div className="flex flex-col items-center gap-8">
             {/* <!-- Centered Pill Tabs (Top) --> */}
             <div className="w-full flex justify-center px-4">
               <div className="flex flex-wrap justify-center gap-2 w-full md:w-auto bg-charcoal dark:bg-black p-1 rounded-3xl md:rounded-full shadow-lg border border-white/5">
@@ -1032,9 +1032,6 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
                         }`}
                     >
                       <span>{category.name}</span>
-                      <span className={`text-[9px] md:text-[10px] font-bold self-start mt-0.5 transition-colors duration-300 ${isActive ? 'text-charcoal/40' : 'text-white/30 group-hover:text-white/60'}`}>
-                        {category.number}
-                      </span>
                     </button>
                   );
                 })}
@@ -1042,7 +1039,7 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
             </div>
 
             {/* <!-- Product Cards Carousel (Below) - Conditional Auto Scroll --> */}
-            <div className="w-full relative overflow-hidden premium-scroll-mask flex items-center min-h-[400px]">
+            <div className="w-full relative overflow-hidden premium-scroll-mask flex items-center min-h-[480px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab}
@@ -1059,13 +1056,13 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
 
                     if (!shouldScroll) {
                       return (
-                        <div className="flex flex-wrap justify-center gap-8 w-full py-4">
+                        <div className="flex flex-wrap justify-center gap-8 w-full py-8">
                           {products.map((product: TransformedProduct) => (
                             <div
                               key={product.id}
                               className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col transition-all duration-300 hover:scale-[1.03] hover:shadow-xl relative"
                             >
-                              <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800 relative">
+                              <div className="bg-gray-50 dark:bg-zinc-900 rounded-2xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800 relative">
                                 <Image
                                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                   alt={product.name}
@@ -1089,7 +1086,7 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
 
                     return (
                       <div
-                        className="flex animate-scroll-reverse hover:pause gap-8 w-max"
+                        className="flex animate-scroll-reverse hover:pause gap-8 w-max py-8"
                         style={{ animationDuration: `${Math.max(products.length * 6, 12)}s` }}
                       >
                         {[1, 2].map((loop) => (
@@ -1099,7 +1096,7 @@ export function LandingPage({ clients, projects, gallery, products, awards, test
                                 key={`${loop}-${product.id}`}
                                 className="w-[220px] md:w-[260px] bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100 dark:border-zinc-700 flex flex-col shrink-0 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:z-20 relative"
                               >
-                                <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800 relative">
+                                <div className="bg-gray-50 dark:bg-zinc-900 rounded-2xl h-[180px] flex items-center justify-center mb-6 overflow-hidden border border-gray-100 dark:border-zinc-800 relative">
                                   <Image
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     alt={product.name}
